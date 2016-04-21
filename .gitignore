@@ -3,3 +3,6 @@
 /reports/
 /bin/
 /jacoco.exec
+/design/diagrams/*.png
+/requirements/*.png
+*~

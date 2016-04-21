@@ -3,6 +3,10 @@ package com.mgiandia.library.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.mgiandia.library.LibraryException;
+import com.mgiandia.library.util.SystemDate;
+import com.sun.org.apache.bcel.internal.generic.CPInstruction;
+
 
 
 
@@ -23,6 +27,24 @@ public class Book {
     private Set<Item> items = new HashSet<Item>();
     private Set<Author> authors = new HashSet<Author>();
 
+    private Set<UserComment> comments = new HashSet<>();
+    
+    public Set<UserComment> getComments() {
+		return new HashSet<>(comments);
+	}
+    
+    public void addComment(UserComment comment){
+    	if (comment != null){
+    		comment.setBook(this);
+    	}
+    }
+    
+    public void removeComment(UserComment comment){
+    	if (comment != null){
+    		comment.setBook(null);
+    	}
+    }
+    
     /**
      * Προκαθορισμένος κατασκευαστής.
      */
@@ -213,4 +235,60 @@ public class Book {
     Set<Author> friendAuthors() {
         return authors;
     }
+
+	public Set<UserComment> friendComments() {
+		return comments;
+	}
+	
+	public double getAvgRating(){
+
+		if (comments.size() == 0){
+			throw new LibraryException("Empty comments list");
+		}
+		
+		double sumRatings = 0;
+		for(UserComment c: comments){
+			sumRatings += c.getRating();
+		}
+		return sumRatings/comments.size();
+	}
+
+	public Reservation reserve(Borrower b) {
+
+		if (b == null){
+			return null;
+		}
+		
+		boolean itemsAvailable = hasAvailableItems();
+		
+		if (itemsAvailable){
+			return null;
+		}
+		
+		boolean isCurrentBorrower = b.hasPendingLoan(this);
+		
+		if (isCurrentBorrower){
+			return null;
+		}
+		
+		Reservation r = new Reservation();
+		r.setBook(this);
+		r.setBorrower(b);
+		r.setReservationDate(SystemDate.now());
+		
+		return r;
+	}
+
+	private boolean hasAvailableItems() {
+		boolean itemsAvailable = false;
+		
+		for(Item i: items){
+			if (i.getState().equals(ItemState.AVAILABLE)){
+				itemsAvailable = true;
+				break;
+			}
+		}
+		return itemsAvailable;
+	}
+	
  }
