@@ -12,7 +12,7 @@ public class ReservationPresenterTest {
 	
 		ReservationPresenter presenter = new ReservationPresenter(new ReservationJFrame());
 		presenter.start();
-					
+		
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
