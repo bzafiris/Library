@@ -13,6 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.mgiandia.library.dao.BorrowerDAO;
+import com.mgiandia.library.dao.Initializer;
+import com.mgiandia.library.domain.Book;
+import com.mgiandia.library.domain.Borrower;
+import com.mgiandia.library.memorydao.BorrowerDAOMemory;
+import com.mgiandia.library.memorydao.MemoryInitializer;
 import com.mgiandia.library.ui.DefaultJFrame;
 
 @SuppressWarnings("serial")
@@ -45,6 +51,10 @@ public class ReservationJFrame extends DefaultJFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					Initializer initializer = new MemoryInitializer();
+					initializer.prepareData();
+					
 					ReservationJFrame frame = new ReservationJFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -112,6 +122,8 @@ public class ReservationJFrame extends DefaultJFrame {
 			}
 		});
 		reserveButton.setText("Reserve");
+		
+		setReserveActionEnabled(false);
 
 		cancelButton = new JButton();
 		cancelButton.addActionListener(new ActionListener() {
@@ -205,7 +217,7 @@ public class ReservationJFrame extends DefaultJFrame {
 		return reserveButton.isEnabled();
 	}
 
-	public void setLoanActionEnabled(boolean enabled) {
+	public void setReserveActionEnabled(boolean enabled) {
 		reserveButton.setEnabled(enabled);
 	}
 
@@ -223,10 +235,43 @@ public class ReservationJFrame extends DefaultJFrame {
 	}
 
 	
+	private Borrower borrower;
+	private boolean borrowerFound;
+	
 	private void searchBorrowerActionPerformed(ActionEvent evt) {
+		
+		Integer borrowerNo = getBorrowerNo();
+		// use borrowerNo for searching in the database
+		BorrowerDAO borrowerDao = new BorrowerDAOMemory();
+		borrower = borrowerDao.find(borrowerNo);
+		
+		if (borrower == null){
+			borrowerFound = false;
+			setBorrowerFirstName("");
+			setBorrowerLastName("");
+			showError("Borrower not found");
+		} else {
+			borrowerFound = true;
+			setBorrowerFirstName(borrower.getFirstName());
+			setBorrowerLastName(borrower.getLastName());
+		}
+		
+		if (borrowerFound && bookFound){
+			setReserveActionEnabled(true);
+		} else {
+			setReserveActionEnabled(false);
+		}
+		
 	}
+	
+	private Book book;
+	private boolean bookFound;
 
 	private void searchBookActionPerformed(ActionEvent evt) {
+		
+		Integer bookNo = getBookNumber();
+		
+		
 	}
 
 	private void reserveButtonActionPerformed(ActionEvent evt) {
