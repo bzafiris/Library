@@ -123,4 +123,6 @@ public abstract class Initializer  {
     protected abstract ItemDAO getItemDAO();
     protected abstract LoanDAO getLoanDAO();
     
+    
+    
 }
