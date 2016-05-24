@@ -1,7 +1,5 @@
 package com.mgiandia.library.ui.reservation;
 
-import java.awt.event.ActionEvent;
-
 import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.dao.BorrowerDAO;
 import com.mgiandia.library.domain.Book;
@@ -14,9 +12,9 @@ public class ReservationPresenter {
 	public boolean borrowerFound;
 	public Book book;
 	public boolean bookFound;
-	private ReservationJFrame view;
+	private ReservationView view;
 
-	public ReservationPresenter(ReservationJFrame view) {
+	public ReservationPresenter(ReservationView view) {
 		this.view = view;
 	}
 
@@ -29,32 +27,29 @@ public class ReservationPresenter {
 		view.close();
 	}
 	
-	public void searchBook(ReservationJFrame reservationJFrame) {
-		String isbn = reservationJFrame.getBookISBN();
+	public void searchBook() {
+		String isbn = view.getBookISBN();
 		BookDAO bookDaoMemory = new BookDAOMemory();
 		book = bookDaoMemory.find(isbn);
 	
 		if (book == null) {
 			bookFound = false;
-			reservationJFrame.setBookTitle("");
-			reservationJFrame.showError("Book not found");
+			view.setBookTitle("");
+			view.showError("Book not found");
 		} else {
 			bookFound = true;
-			reservationJFrame.setBookTitle(book.getTitle());
+			view.setBookTitle(book.getTitle());
 		}
 	
 		if (borrowerFound && bookFound) {
-			reservationJFrame.setReserveActionEnabled(true);
+			view.setReserveActionEnabled(true);
 		} else {
-			reservationJFrame.setReserveActionEnabled(false);
+			view.setReserveActionEnabled(false);
 		}
 	}
 
-	void searchBorrower(ReservationJFrame view, ActionEvent evt) {
-		searchBorrower(view);
-	}
 
-	void searchBorrower(ReservationJFrame view) {
+	void searchBorrower() {
 	
 		Integer borrowerNo = view.getBorrowerNo();
 		// use borrowerNo for searching in the database

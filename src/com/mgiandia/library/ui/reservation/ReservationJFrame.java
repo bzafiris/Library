@@ -18,7 +18,7 @@ import com.mgiandia.library.memorydao.MemoryInitializer;
 import com.mgiandia.library.ui.DefaultJFrame;
 
 @SuppressWarnings("serial")
-public class ReservationJFrame extends DefaultJFrame {
+public class ReservationJFrame extends DefaultJFrame implements ReservationView {
 
 	private JPanel contentPane;
 	private JTextField borrowerFirstName;
@@ -226,14 +226,14 @@ public class ReservationJFrame extends DefaultJFrame {
 	}
 
 	private void searchBorrowerActionPerformed(ActionEvent evt) {
-		presenter.searchBorrower(this);
+		presenter.searchBorrower();
 	}
 
 	ReservationPresenter presenter;
 
 	private void searchBookActionPerformed(ActionEvent evt) {
 
-		presenter.searchBook(this);
+		presenter.searchBook();
 
 	}
 
