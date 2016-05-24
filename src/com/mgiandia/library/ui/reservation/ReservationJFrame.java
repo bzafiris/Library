@@ -229,7 +229,7 @@ public class ReservationJFrame extends DefaultJFrame {
 		presenter.searchBorrower(this);
 	}
 
-	ReservationPresenter presenter = new ReservationPresenter();
+	ReservationPresenter presenter;
 
 	private void searchBookActionPerformed(ActionEvent evt) {
 
@@ -241,6 +241,10 @@ public class ReservationJFrame extends DefaultJFrame {
 	}
 
 	private void cancelButtonActionPerformed(ActionEvent evt) {
+	}
+
+	public void setPresenter(ReservationPresenter reservationPresenter) {
+		this.presenter = reservationPresenter;
 	}
 
 }

@@ -3,15 +3,16 @@ package com.mgiandia.library.ui;
 import org.junit.Test;
 
 import com.mgiandia.library.ui.reservation.ReservationJFrame;
+import com.mgiandia.library.ui.reservation.ReservationPresenter;
 
-public class ReservationTest {
+public class ReservationPresenterTest {
 
 	@Test
 	public void test() {
 	
-		ReservationJFrame frame = new ReservationJFrame();
-		frame.setVisible(true);
-			
+		ReservationPresenter presenter = new ReservationPresenter(new ReservationJFrame());
+		presenter.start();
+					
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {

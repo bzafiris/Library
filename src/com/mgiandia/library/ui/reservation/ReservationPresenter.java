@@ -14,10 +14,21 @@ public class ReservationPresenter {
 	public boolean borrowerFound;
 	public Book book;
 	public boolean bookFound;
+	private ReservationJFrame view;
 
-	public ReservationPresenter() {
+	public ReservationPresenter(ReservationJFrame view) {
+		this.view = view;
 	}
 
+	public void start(){
+		view.setPresenter(this);
+		view.open();
+	}
+	
+	public void cancel(){
+		view.close();
+	}
+	
 	public void searchBook(ReservationJFrame reservationJFrame) {
 		String isbn = reservationJFrame.getBookISBN();
 		BookDAO bookDaoMemory = new BookDAOMemory();
