@@ -115,7 +115,13 @@ public abstract class Initializer  {
         ndia.setCategory(undergraduate);
         
         getBorrowerDAO().save(mgia);
-        getBorrowerDAO().save(ndia);                                
+        getBorrowerDAO().save(ndia);                   
+        
+        BookDAO bookDao = getBookDAO();
+        bookDao.save(refactoring);
+        bookDao.save(umlDistilled);
+        bookDao.save(umlUserGuide);
+        
     }    
     
     
@@ -123,6 +129,6 @@ public abstract class Initializer  {
     protected abstract ItemDAO getItemDAO();
     protected abstract LoanDAO getLoanDAO();
     
-    
+    protected abstract BookDAO getBookDAO();
     
 }

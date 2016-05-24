@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.dao.BorrowerDAO;
 import com.mgiandia.library.dao.Initializer;
 import com.mgiandia.library.domain.Book;
@@ -265,7 +266,7 @@ public class ReservationJFrame extends DefaultJFrame {
 	private void searchBookActionPerformed(ActionEvent evt) {
 
 		String isbn = getBookISBN();
-		BookDAOMemory bookDaoMemory = new BookDAOMemory();
+		BookDAO bookDaoMemory = new BookDAOMemory();
 		book = bookDaoMemory.find(isbn);
 
 		if (book == null) {

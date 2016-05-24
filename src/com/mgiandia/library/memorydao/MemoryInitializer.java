@@ -2,6 +2,7 @@ package com.mgiandia.library.memorydao;
 
 import java.util.List;
 
+import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.dao.BorrowerDAO;
 import com.mgiandia.library.dao.Initializer;
 import com.mgiandia.library.dao.ItemDAO;
@@ -45,5 +46,11 @@ public class MemoryInitializer extends Initializer {
 	protected LoanDAO getLoanDAO() {
 		return new LoanDAOMemory();
 	}
-    
+
+	@Override
+	protected BookDAO getBookDAO() {
+		return new BookDAOMemory();
+	}
+
+
 }
