@@ -94,7 +94,7 @@ public class ReservationJFrame extends DefaultJFrame {
 		firstNameLabel.setText("First Name");
 
 		bookNoLabel = new JLabel();
-		bookNoLabel.setText("Book Number");
+		bookNoLabel.setText("Book ISBN");
 
 		titleLabel = new JLabel();
 		titleLabel.setText("Book Title");
@@ -209,8 +209,8 @@ public class ReservationJFrame extends DefaultJFrame {
 		return Integer.parseInt(borrowerNo.getText());
 	}
 
-	public int getBookNumber() {
-		return Integer.parseInt(bookNumber.getText());
+	public String getBookISBN() {
+		return bookNumber.getText();
 	}
 
 	public boolean isReserveActionEnabled() {
@@ -269,7 +269,8 @@ public class ReservationJFrame extends DefaultJFrame {
 
 	private void searchBookActionPerformed(ActionEvent evt) {
 		
-		Integer bookNo = getBookNumber();
+		String isbn = getBookISBN();
+		
 		
 		
 	}
