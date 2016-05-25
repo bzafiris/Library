@@ -50,7 +50,7 @@ public class ReservationPresenterTest {
 	}
 
 	@Test
-	public void searchForΒookById() {
+	public void searchForBookByISBN() {
 
 		presenter.start();
 
@@ -77,37 +77,60 @@ public class ReservationPresenterTest {
 		view.setBorrowerNo(1);
 		// πατήθηκε το κουμπί search
 		presenter.searchBorrower();
-		
+
 		Assert.assertTrue(view.isReserveActionEnabled());
 
 	}
-	
+
 	@Test
-	public void reserveBookWithNoAvailableItems(){
+	public void allowBookReservationWhenNoAvailableItems() {
 		presenter.start();
-		
-		
+
 		view.setBookISBN("3");
 		view.setBorrowerNo(1);
-		
+
 		presenter.searchBook();
 		presenter.searchBorrower();
-		
+
 		Assert.assertTrue(view.isReserveActionEnabled());
-		
+
 		// επιλογή κουμπιού reserve
 		presenter.reserveBook();
-		
+
 		// θα πρέπει να εντοπιστεί κράτηση στη βάση δεδομένων
 		ReservationDAO reservationDao = new ReservationDAOMemory();
 		List<Reservation> reservations = reservationDao.findAll();
-		
+
 		Assert.assertEquals(1, reservations.size());
 		Reservation r = reservations.get(0);
 		Assert.assertEquals("3", r.getBook().getIsbn().getValue());
 		Assert.assertEquals(1, r.getBorrower().getBorrowerNo());
-		
 		// έλεγχος ημερομηνίας κράτησης
 	}
+	
+	@Test
+	public void denyBookReservationWhenAvailableItems() {
+		presenter.start();
+
+		view.setBookISBN("1");
+		view.setBorrowerNo(1);
+
+		presenter.searchBook();
+		presenter.searchBorrower();
+
+		Assert.assertTrue(view.isReserveActionEnabled());
+
+		// επιλογή κουμπιού reserve
+		presenter.reserveBook();
+
+		// θα πρέπει να εντοπιστεί κράτηση στη βάση δεδομένων
+		ReservationDAO reservationDao = new ReservationDAOMemory();
+		List<Reservation> reservations = reservationDao.findAll();
+
+		Assert.assertEquals(0, reservations.size());
+		
+	}
+	
+	
 
 }

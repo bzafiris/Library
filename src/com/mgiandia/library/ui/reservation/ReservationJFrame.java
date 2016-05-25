@@ -238,6 +238,7 @@ public class ReservationJFrame extends DefaultJFrame implements ReservationView 
 	}
 
 	private void reserveButtonActionPerformed(ActionEvent evt) {
+		presenter.reserveBook();
 	}
 
 	private void cancelButtonActionPerformed(ActionEvent evt) {
