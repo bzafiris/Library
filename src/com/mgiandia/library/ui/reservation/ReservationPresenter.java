@@ -2,10 +2,13 @@ package com.mgiandia.library.ui.reservation;
 
 import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.dao.BorrowerDAO;
+import com.mgiandia.library.dao.ReservationDAO;
 import com.mgiandia.library.domain.Book;
 import com.mgiandia.library.domain.Borrower;
+import com.mgiandia.library.domain.Reservation;
 import com.mgiandia.library.memorydao.BookDAOMemory;
 import com.mgiandia.library.memorydao.BorrowerDAOMemory;
+import com.mgiandia.library.memorydao.ReservationDAOMemory;
 
 public class ReservationPresenter {
 	public Borrower borrower;
@@ -73,5 +76,18 @@ public class ReservationPresenter {
 			view.setReserveActionEnabled(false);
 		}
 	
+	}
+
+	public void reserveBook() {
+		
+		Reservation reservation = book.reserve(borrower);
+		if (reservation == null){
+			view.showError("Reservation failed");
+			return;
+		}
+		
+		ReservationDAO dao = new ReservationDAOMemory();
+		dao.save(reservation);
+		
 	}
 }

@@ -1,13 +1,17 @@
 package com.mgiandia.library.ui;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.mgiandia.library.dao.Initializer;
+import com.mgiandia.library.dao.ReservationDAO;
+import com.mgiandia.library.domain.Reservation;
 import com.mgiandia.library.memorydao.MemoryInitializer;
+import com.mgiandia.library.memorydao.ReservationDAOMemory;
 import com.mgiandia.library.ui.reservation.ReservationPresenter;
-
-import org.junit.Assert;
 
 public class ReservationPresenterTest {
 
@@ -76,6 +80,34 @@ public class ReservationPresenterTest {
 		
 		Assert.assertTrue(view.isReserveActionEnabled());
 
+	}
+	
+	@Test
+	public void reserveBookWithNoAvailableItems(){
+		presenter.start();
+		
+		
+		view.setBookISBN("3");
+		view.setBorrowerNo(1);
+		
+		presenter.searchBook();
+		presenter.searchBorrower();
+		
+		Assert.assertTrue(view.isReserveActionEnabled());
+		
+		// επιλογή κουμπιού reserve
+		presenter.reserveBook();
+		
+		// θα πρέπει να εντοπιστεί κράτηση στη βάση δεδομένων
+		ReservationDAO reservationDao = new ReservationDAOMemory();
+		List<Reservation> reservations = reservationDao.findAll();
+		
+		Assert.assertEquals(1, reservations.size());
+		Reservation r = reservations.get(0);
+		Assert.assertEquals("3", r.getBook().getIsbn().getValue());
+		Assert.assertEquals(1, r.getBorrower().getBorrowerNo());
+		
+		// έλεγχος ημερομηνίας κράτησης
 	}
 
 }

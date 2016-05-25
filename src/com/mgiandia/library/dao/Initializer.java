@@ -114,6 +114,9 @@ public abstract class Initializer  {
         Borrower ndia = new Borrower(DIAMANTIDIS_ID, "Νίκος", "Διαμαντίδης",null, new EmailAddress("nad@aueb.gr"), null);
         ndia.setCategory(undergraduate);
         
+        Loan loan = refactoringItem3.borrow(ndia);
+        getLoanDAO().save(loan);
+        
         getBorrowerDAO().save(mgia);
         getBorrowerDAO().save(ndia);                   
         
