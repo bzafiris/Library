@@ -34,7 +34,7 @@ public class ReservationPresenter {
 		String isbn = view.getBookISBN();
 		BookDAO bookDaoMemory = new BookDAOMemory();
 		book = bookDaoMemory.find(isbn);
-	
+	 
 		if (book == null) {
 			bookFound = false;
 			view.setBookTitle("");

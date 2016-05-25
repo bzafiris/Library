@@ -32,7 +32,7 @@ public class ReservationPresenterTest {
 		Assert.assertTrue(view.isOpen());
 		Assert.assertFalse(view.isReserveActionEnabled());
 	}
-
+ 
 	@Test
 	public void searchForBorrowerById() {
 
