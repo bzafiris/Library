@@ -49,7 +49,7 @@ public class ReservationPresenter {
 	}
 
 
-	void searchBorrower() {
+	public void searchBorrower() {
 	
 		Integer borrowerNo = view.getBorrowerNo();
 		// use borrowerNo for searching in the database
