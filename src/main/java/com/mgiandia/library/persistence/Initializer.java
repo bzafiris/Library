@@ -11,6 +11,7 @@ import com.mgiandia.library.domain.Borrower;
 import com.mgiandia.library.domain.BorrowerCategory;
 import com.mgiandia.library.domain.ISBN;
 import com.mgiandia.library.domain.Item;
+import com.mgiandia.library.domain.Loan;
 import com.mgiandia.library.domain.Publisher;
 import com.mgiandia.library.util.Money;
 
@@ -124,6 +125,8 @@ public class Initializer  {
         refactoringItem3.setBook(refactoring);
         refactoringItem3.available();
         
+        
+        
         Item umlUserGuideItem4 = new Item(UML_USER_GUIDE_ID2);
         umlUserGuideItem4.setBook(umlUserGuide);
         umlUserGuideItem4.available();
@@ -152,8 +155,10 @@ public class Initializer  {
         Borrower ndia = new Borrower(DIAMANTIDIS_ID, "Νίκος", "Διαμαντίδης",null, new EmailAddress("nad@aueb.gr"), null);
         ndia.setCategory(undergraduate);
         
+        Loan loan = refactoringItem3.borrow(mgia);
         em.persist(mgia);
         em.persist(ndia);
+        em.persist(loan);
         tx.commit();
         em.close();
     }    

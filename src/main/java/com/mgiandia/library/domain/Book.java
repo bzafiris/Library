@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.mgiandia.library.util.SystemDate;
+
 
 
 
@@ -270,4 +272,37 @@ public class Book {
     public int hashCode() {
         return isbn == null ? 0 : isbn.hashCode();
     }
+
+	public Reservation reserveFor(Borrower borrower) {
+		
+		if (borrower == null) {
+			return null;
+		}
+		
+		boolean hasAvailableItems = false;
+		for(Item item: items) {
+			if (item.getState().equals(ItemState.AVAILABLE)) {
+				hasAvailableItems = true;
+				break;
+			}
+		}
+		
+		if (hasAvailableItems) {
+			return null;
+		}
+		
+		Set<Loan> loans = borrower.getLoans();
+		for(Loan loan: loans) {
+			if (loan.getItem().getBook().equals(this)) {
+				return null;
+			}
+		}
+		
+		Reservation r = new Reservation();
+		r.setBook(this);
+		r.setBorrower(borrower);
+		r.setExpirationDate(SystemDate.now().addDays(15));
+		
+		return r;
+	}
  }
