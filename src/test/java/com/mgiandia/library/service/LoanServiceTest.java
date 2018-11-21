@@ -33,15 +33,15 @@ public class LoanServiceTest extends LibraryServiceTest {
 
 		LoanService loanService = new LoanService(em);
 		loanService.findBorrower(Initializer.DIAMANTIDIS_ID);
-		Assert.assertNotNull(loanService.borrow(Initializer.UML_DISTILLED_ID1));
+		Assert.assertNotNull(loanService.borrow(Initializer.UML_REFACTORING_ID));
 
 		em.clear();
-		List<Loan> loanList = em.createQuery("select l from Loan l").getResultList();
+		List<Loan> loanList = em.createQuery("select l from Loan l where l.item.itemNumber = 3").getResultList();
 
 		Loan loan = loanList.get(0);
 
 		Assert.assertTrue(loan.isPending());
-		Assert.assertEquals(Initializer.UML_DISTILLED_ID1, loan.getItem().getItemNumber());
+		Assert.assertEquals(Initializer.UML_REFACTORING_ID, loan.getItem().getItemNumber());
 		Assert.assertEquals(ItemState.LOANED, loan.getItem().getState());
 
 	}
@@ -53,10 +53,10 @@ public class LoanServiceTest extends LibraryServiceTest {
 		loanService.findBorrower(Initializer.DIAMANTIDIS_ID);
 
 		Assert.assertNotNull(loanService.borrow(Initializer.UML_USER_GUIDE_ID1));
-		Assert.assertNotNull(loanService.borrow(Initializer.UML_DISTILLED_ID1));
+		//Assert.assertNotNull(loanService.borrow(Initializer.UML_DISTILLED_ID1));
 		Assert.assertNotNull(loanService.borrow(Initializer.UML_REFACTORING_ID));
 		Assert.assertNotNull(loanService.borrow(Initializer.UML_USER_GUIDE_ID2));
-		Assert.assertNull(loanService.borrow(Initializer.UML_DISTILLED_ID2));
+		//Assert.assertNull(loanService.borrow(Initializer.UML_DISTILLED_ID2));
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class LoanServiceTest extends LibraryServiceTest {
 		// some loans
 		service.findBorrower(Initializer.GIAKOUMAKIS_ID);
 		Assert.assertNotNull(service.borrow(Initializer.UML_USER_GUIDE_ID1));
-		Assert.assertNotNull(service.borrow(Initializer.UML_DISTILLED_ID1));
+		//Assert.assertNotNull(service.borrow(Initializer.UML_DISTILLED_ID1));
 
 		service.findBorrower(Initializer.DIAMANTIDIS_ID);
 		Assert.assertNotNull(service.borrow(Initializer.UML_REFACTORING_ID));
@@ -75,7 +75,7 @@ public class LoanServiceTest extends LibraryServiceTest {
 
 		List<Loan> loans = service.findPendingLoans(false);
 
-		Assert.assertEquals(loans.size(), 3);
+		Assert.assertEquals(loans.size(), 2 + 2);
 		Assert.assertNotNull(loans.get(0).getBorrower());
 		Assert.assertNotNull(loans.get(0).getItem());
 
@@ -106,10 +106,10 @@ public class LoanServiceTest extends LibraryServiceTest {
 
 		
 			LoanService service = new LoanService(em);
+			
+			Loan foundLoan = service.findPendingLoan(Initializer.UML_DISTILLED_ID1);
 
-			Loan foundLoan = service.findPendingLoan(Initializer.UML_REFACTORING_ID);
-
-			Assert.assertNull(foundLoan);
+			Assert.assertNotNull(foundLoan);
 
 		
 	}
@@ -123,7 +123,7 @@ public class LoanServiceTest extends LibraryServiceTest {
 			// some loans
 			service.findBorrower(Initializer.GIAKOUMAKIS_ID);
 			Assert.assertNotNull(service.borrow(Initializer.UML_USER_GUIDE_ID1));
-			Assert.assertNotNull(service.borrow(Initializer.UML_DISTILLED_ID1));
+			//Assert.assertNotNull(service.borrow(Initializer.UML_DISTILLED_ID1));
 
 			service.findBorrower(Initializer.DIAMANTIDIS_ID);
 			Assert.assertNotNull(service.borrow(Initializer.UML_REFACTORING_ID));
@@ -133,7 +133,7 @@ public class LoanServiceTest extends LibraryServiceTest {
 
 			List<Loan> loans = service.findPendingLoans(true);
 
-			Assert.assertEquals(loans.size(), 3);
+			Assert.assertEquals(loans.size(), 2 + 2);
 			Assert.assertNotNull(loans.get(0).getBorrower());
 			Assert.assertNotNull(loans.get(0).getItem());
 		

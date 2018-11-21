@@ -80,17 +80,17 @@ public class ReturnPresenterTest {
     
     @Test
     public void returnItemNoFine() {
-        EasyMock.expect(mock.getItemNumber()).andReturn(Initializer.UML_DISTILLED_ID1);
+        EasyMock.expect(mock.getItemNumber()).andReturn(Initializer.UML_USER_GUIDE_ID1);
         mock.showInfo((String) EasyMock.anyObject());
         
         EasyMock.replay(mock);        
-        loanUMLDistilledToDiamantidis();
+        loanUMLUserGuideToDiamantidis();
         
         presenter.start();
         presenter.returnItem();
         
         Assert.assertTrue(presenter.isLoanFound());
-        Assert.assertEquals(Initializer.UML_DISTILLED_ID1, presenter.getLoan().getItem().getItemNumber());
+        Assert.assertEquals(Initializer.UML_USER_GUIDE_ID1, presenter.getLoan().getItem().getItemNumber());
         
         EasyMock.verify(mock);
     }
@@ -98,13 +98,13 @@ public class ReturnPresenterTest {
 
     @Test
     public void returnItemWithFine() {
-        EasyMock.expect(mock.getItemNumber()).andReturn(Initializer.UML_DISTILLED_ID1);
+        EasyMock.expect(mock.getItemNumber()).andReturn(Initializer.UML_USER_GUIDE_ID1);
         mock.showInfo((String) EasyMock.anyObject());
         
         EasyMock.replay(mock);
         
         setSystemDateTo1stMarch2007();
-        loanUMLDistilledToDiamantidis();
+        loanUMLUserGuideToDiamantidis();
         setSystemDateTo30thMarch2007();
         
         presenter.start();
@@ -112,7 +112,7 @@ public class ReturnPresenterTest {
         
         
         Assert.assertTrue(presenter.isLoanFound());
-        Assert.assertEquals(Initializer.UML_DISTILLED_ID1, presenter.getLoan().getItem().getItemNumber());
+        Assert.assertEquals(Initializer.UML_USER_GUIDE_ID1, presenter.getLoan().getItem().getItemNumber());
         Assert.assertTrue(presenter.getLoan().getOverdue() > 0);
         
         
@@ -120,7 +120,7 @@ public class ReturnPresenterTest {
     }
 
     
-    private void loanUMLDistilledToDiamantidis() {
+    private void loanUMLUserGuideToDiamantidis() {
         
     	EntityManager em = JPAUtil.createEntityManager();
     	EntityTransaction tx = em.getTransaction();
@@ -128,7 +128,7 @@ public class ReturnPresenterTest {
     	
     	
         Borrower borrower = em.find(Borrower.class, Initializer.DIAMANTIDIS_ID); 
-        Item item = em.find(Item.class, Initializer.UML_DISTILLED_ID1);
+        Item item = em.find(Item.class, Initializer.UML_USER_GUIDE_ID1);
         
         Loan loan = item.borrow(borrower);
         

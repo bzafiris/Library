@@ -140,7 +140,8 @@ public class LoanService {
 				.createQuery("select loan from Loan loan join fetch loan.borrower b "
 						+ " join fetch loan.item item "
 						+ " join fetch item.book book "
-						+ " where loan.returnDate is null ");
+						+ " where loan.returnDate is null and item.itemNumber = :itemNumber");
+		query.setParameter("itemNumber", itemId);
 
 		try {
 			pendingLoan = (Loan) query.getSingleResult();

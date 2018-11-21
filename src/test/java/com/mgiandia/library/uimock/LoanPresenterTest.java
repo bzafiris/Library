@@ -122,7 +122,7 @@ public class LoanPresenterTest {
     @Test
     public void performLoan() {
         EasyMock.expect(mock.getBorrowerNo()).andReturn(Initializer.DIAMANTIDIS_ID);
-        EasyMock.expect(mock.getItemNumber()).andReturn(Initializer.UML_DISTILLED_ID1);
+        EasyMock.expect(mock.getItemNumber()).andReturn(Initializer.UML_USER_GUIDE_ID1);
         mock.setBorrowerLastName((String) EasyMock.anyObject());
         mock.setBorrowerFirstName((String) EasyMock.anyObject());
         mock.setBookTitle((String) EasyMock.anyObject());

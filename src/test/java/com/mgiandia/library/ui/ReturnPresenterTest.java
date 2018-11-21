@@ -68,41 +68,41 @@ public class ReturnPresenterTest {
     
     @Test
     public void returnItemNoFine() {
-        loanUMLDistilledToDiamantidis();
+        loanUMLUserGuideToDiamantidis();
 
-    	returnView.setItemNumber(Initializer.UML_DISTILLED_ID1);
+    	returnView.setItemNumber(Initializer.UML_USER_GUIDE_ID1);
         presenter.start();
         presenter.returnItem();
         
         Assert.assertTrue(presenter.isLoanFound());
-        Assert.assertEquals(Initializer.UML_DISTILLED_ID1, presenter.getLoan().getItem().getItemNumber());
+        Assert.assertEquals(Initializer.UML_USER_GUIDE_ID1, presenter.getLoan().getItem().getItemNumber());
     }
     
 
     @Test
     public void returnItemWithFine() {
         setSystemDateTo1stMarch2007();
-        loanUMLDistilledToDiamantidis();
+        loanUMLUserGuideToDiamantidis();
         setSystemDateTo30thMarch2007();
-        returnView.setItemNumber(Initializer.UML_DISTILLED_ID1);
+        returnView.setItemNumber(Initializer.UML_USER_GUIDE_ID1);
         
         presenter.start();
         presenter.returnItem();
         
         
         Assert.assertTrue(presenter.isLoanFound());
-        Assert.assertEquals(Initializer.UML_DISTILLED_ID1, presenter.getLoan().getItem().getItemNumber());
+        Assert.assertEquals(Initializer.UML_USER_GUIDE_ID1, presenter.getLoan().getItem().getItemNumber());
         Assert.assertTrue(presenter.getLoan().getOverdue() > 0);
         
     }
 
     
-    private void loanUMLDistilledToDiamantidis() {
+    private void loanUMLUserGuideToDiamantidis() {
         EntityManager em = JPAUtil.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         Borrower borrower = em.find(Borrower.class, Initializer.DIAMANTIDIS_ID); 
-        Item item = em.find(Item.class,Initializer.UML_DISTILLED_ID1 );
+        Item item = em.find(Item.class,Initializer.UML_USER_GUIDE_ID1 );
         Loan loan = item.borrow(borrower);
         em.persist(loan);
         tx.commit();

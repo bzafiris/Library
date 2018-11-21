@@ -18,7 +18,7 @@ public class ReservationServiceTest extends LibraryServiceTest {
 		
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		Item i = em.find(Item.class, Initializer.UML_REFACTORING_ID);
+		Item i = em.find(Item.class, Initializer.UML_DISTILLED_ID1);
 		Book book = i.getBook();
 		
 		tx.commit();
@@ -31,8 +31,6 @@ public class ReservationServiceTest extends LibraryServiceTest {
 		Reservation r = rs.reserveBook(bookId, Initializer.DIAMANTIDIS_ID);
 		
 		assertNotNull(r);
-		
-		
 		
 		
 	}

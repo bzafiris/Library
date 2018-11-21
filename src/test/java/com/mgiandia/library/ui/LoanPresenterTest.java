@@ -109,7 +109,7 @@ public class LoanPresenterTest {
     @Test
     public void performLoan() {       
         loanView.setBorrowerNo(Initializer.DIAMANTIDIS_ID);
-        loanView.setItemNumber(Initializer.UML_DISTILLED_ID1);
+        loanView.setItemNumber(Initializer.UML_USER_GUIDE_ID1);
                
         
         presenter.start();

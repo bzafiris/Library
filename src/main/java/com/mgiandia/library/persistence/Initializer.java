@@ -66,6 +66,8 @@ public class Initializer  {
         
         Query query = em.createNativeQuery("delete from loans");
         query.executeUpdate();
+        query = em.createNativeQuery("delete from reservations");
+        query.executeUpdate();                
         query = em.createNativeQuery("delete from items");
         query.executeUpdate();                
         query = em.createNativeQuery("delete from bookauthors");
@@ -112,38 +114,36 @@ public class Initializer  {
                 new ISBN("3"), "1", 1999, addisonWesley);
         
         
-        Item umlUserGuideItem1 = new Item(UML_USER_GUIDE_ID1);
-        umlUserGuideItem1.setBook(umlUserGuide);
-        umlUserGuideItem1.available();
+        Item umlUserGuideItemId1 = new Item(UML_USER_GUIDE_ID1);
+        umlUserGuideItemId1.setBook(umlUserGuide);
+        umlUserGuideItemId1.available();
         
         
-        Item umlDistilledItem2 = new Item(UML_DISTILLED_ID1);
-        umlDistilledItem2.setBook(umlDistilled);
-        umlDistilledItem2.available();
+        Item umlDistilledItemId2 = new Item(UML_DISTILLED_ID1);
+        umlDistilledItemId2.setBook(umlDistilled);
+        umlDistilledItemId2.available();
         
-        Item refactoringItem3 = new Item(UML_REFACTORING_ID);
-        refactoringItem3.setBook(refactoring);
-        refactoringItem3.available();
+        Item refactoringItemId3 = new Item(UML_REFACTORING_ID);
+        refactoringItemId3.setBook(refactoring);
+        refactoringItemId3.available();
         
+        Item umlUserGuideItemId4 = new Item(UML_USER_GUIDE_ID2);
+        umlUserGuideItemId4.setBook(umlUserGuide);
+        umlUserGuideItemId4.available();
         
-        
-        Item umlUserGuideItem4 = new Item(UML_USER_GUIDE_ID2);
-        umlUserGuideItem4.setBook(umlUserGuide);
-        umlUserGuideItem4.available();
-        
-        Item umlDistilledItem5 = new Item(UML_DISTILLED_ID2);
-        umlDistilledItem5.setBook(umlDistilled);
-        umlDistilledItem5.available();
+        Item umlDistilledItemId5 = new Item(UML_DISTILLED_ID2);
+        umlDistilledItemId5.setBook(umlDistilled);
+        umlDistilledItemId5.available();
         
         EntityManager em = JPAUtil.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         
-        em.persist(umlUserGuideItem1);
-        em.persist(umlDistilledItem2);
-        em.persist(refactoringItem3);
-        em.persist(umlUserGuideItem4);
-        em.persist(umlDistilledItem5);
+        em.persist(umlUserGuideItemId1);
+        em.persist(umlDistilledItemId2);
+        em.persist(refactoringItemId3);
+        em.persist(umlUserGuideItemId4);
+        em.persist(umlDistilledItemId5);
         
         
         BorrowerCategory professor = new BorrowerCategory("Καθηγητής", 180 , 6, Money.euros(0));
@@ -155,10 +155,13 @@ public class Initializer  {
         Borrower ndia = new Borrower(DIAMANTIDIS_ID, "Νίκος", "Διαμαντίδης",null, new EmailAddress("nad@aueb.gr"), null);
         ndia.setCategory(undergraduate);
         
-        Loan loan = refactoringItem3.borrow(mgia);
+        Loan loan = umlDistilledItemId2.borrow(mgia);
+        Loan loan2 = umlDistilledItemId5.borrow(mgia);
+        
         em.persist(mgia);
         em.persist(ndia);
         em.persist(loan);
+        em.persist(loan2);
         tx.commit();
         em.close();
     }    

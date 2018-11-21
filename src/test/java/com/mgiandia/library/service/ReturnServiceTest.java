@@ -29,7 +29,7 @@ public class ReturnServiceTest extends LibraryServiceTest {
 
 	public void returnWhenNoLoanExist() {
 		ReturnService service = new ReturnService(em);
-		service.returnItem(2);
+		service.returnItem(3);
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class ReturnServiceTest extends LibraryServiceTest {
 		em.clear();
 
 		@SuppressWarnings("unchecked")
-		List<Loan> loanList = em.createQuery("select l from Loan l").getResultList();
+		List<Loan> loanList = em.createQuery("select l from Loan l where l.item.itemNumber = 1").getResultList();
 		Loan loan = loanList.get(0);
 		Assert.assertEquals(new SimpleCalendar(2007, 3, 1), loan.getLoanDate());
 		Assert.assertEquals(new SimpleCalendar(2007, 3, 2), loan.getReturnDate());

@@ -95,7 +95,7 @@ public class BookResourceTest extends LibraryResourceTest {
 	@Test
 	public void testDeleteExistingBook() {
 		// Find a book and update its title
-		List<Book> books = findBooksByTitle("UML");
+		List<Book> books = findBooksByTitle("Refactoring");
 		Assert.assertEquals(1, books.size());
 		Book book = books.get(0);
 
@@ -104,7 +104,7 @@ public class BookResourceTest extends LibraryResourceTest {
 
 		// assertion on request status and database state
 		Assert.assertEquals(200, response.getStatus());
-		List<Book> foundBooks = findBooksByTitle("UML");
+		List<Book> foundBooks = findBooksByTitle("Refactoring");
 		Assert.assertEquals(0, foundBooks.size());
 
 	}
