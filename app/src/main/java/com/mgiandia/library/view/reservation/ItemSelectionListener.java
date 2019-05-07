@@ -1,4 +1,4 @@
-package com.mgiandia.library.presenter;
+package com.mgiandia.library.view.reservation;
 
 /**
  * This interface should be implemented by the Activity that hosts the RecyclerView

@@ -1,4 +1,4 @@
-package com.mgiandia.library.presenter;
+package com.mgiandia.library.view.reservation;
 
 import com.mgiandia.library.domain.Book;
 

@@ -11,8 +11,6 @@ import android.widget.Toast;
 
 import com.mgiandia.library.R;
 import com.mgiandia.library.domain.Book;
-import com.mgiandia.library.presenter.BookReservationPresenter;
-import com.mgiandia.library.presenter.BookReservationView;
 
 public class BookReservationActivity extends AppCompatActivity
         implements BookReservationView {

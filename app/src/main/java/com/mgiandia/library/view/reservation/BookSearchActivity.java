@@ -8,13 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.mgiandia.library.R;
-import com.mgiandia.library.dao.BookDAO;
-import com.mgiandia.library.dao.Initializer;
 import com.mgiandia.library.domain.Book;
-import com.mgiandia.library.memorydao.BookDAOMemory;
-import com.mgiandia.library.memorydao.MemoryInitializer;
-import com.mgiandia.library.presenter.BookSearchPresenter;
-import com.mgiandia.library.presenter.ItemSelectionListener;
 
 import java.util.ArrayList;
 import java.util.Set;

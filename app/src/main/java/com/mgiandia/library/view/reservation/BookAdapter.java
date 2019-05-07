@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.mgiandia.library.R;
 import com.mgiandia.library.domain.Book;
-import com.mgiandia.library.presenter.ItemSelectionListener;
 
 import java.util.List;
 
