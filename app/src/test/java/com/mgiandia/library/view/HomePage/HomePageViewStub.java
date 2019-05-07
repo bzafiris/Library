@@ -68,6 +68,11 @@ public class HomePageViewStub implements HomePageView
         manageReturnsClicks++;
     }
 
+    @Override
+    public void manageReservations() {
+
+    }
+
     public int getManageBorrowersClicks()
     {
         return manageBorrowersClicks;

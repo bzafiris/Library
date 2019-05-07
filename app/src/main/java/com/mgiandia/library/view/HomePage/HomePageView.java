@@ -53,4 +53,6 @@ public interface HomePageView
      * ελέγχεται αν πρέπει να φορτωθούν οι επιστροφές.
      */
     void manageReturns();
+
+    void manageReservations();
 }

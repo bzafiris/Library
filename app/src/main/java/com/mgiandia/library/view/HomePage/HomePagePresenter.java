@@ -85,4 +85,8 @@ public class HomePagePresenter
     {
         view.manageReturns();
     }
+
+    public void onManageReservations() {
+        view.manageReservations();
+    }
 }

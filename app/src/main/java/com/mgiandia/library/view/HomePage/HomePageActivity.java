@@ -11,6 +11,7 @@ import com.mgiandia.library.view.Author.ManageAuthors.ManageAuthorsActivity;
 import com.mgiandia.library.view.Book.ManageBooks.ManageBooksActivity;
 import com.mgiandia.library.view.Borrower.ManageBorrowers.ManageBorrowersActivity;
 import com.mgiandia.library.view.Publisher.ManagePublishers.ManagePublishersActivity;
+import com.mgiandia.library.view.reservation.BookReservationActivity;
 
 /**
  * @author Νίκος Σαραντινός
@@ -74,6 +75,12 @@ public class HomePageActivity extends AppCompatActivity implements HomePageView
         findViewById(R.id.manage_returns_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 presenter.onManageReturns();
+            }
+        });
+
+        findViewById(R.id.manage_reservations_button).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                presenter.onManageReservations();
             }
         });
 
@@ -157,6 +164,12 @@ public class HomePageActivity extends AppCompatActivity implements HomePageView
     {
         Intent intent = new Intent(HomePageActivity.this, ManageBorrowersActivity.class);
         intent.putExtra("should_load_returns", 1);
+        startActivity(intent);
+    }
+
+    @Override
+    public void manageReservations() {
+        Intent intent = new Intent(HomePageActivity.this, BookReservationActivity.class);
         startActivity(intent);
     }
 }

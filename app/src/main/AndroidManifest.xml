@@ -118,8 +118,16 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".view.reservation.BookReservationActivity"
+            android:label="@string/s_book_reservations"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondaryTheme"
             android:exported="true" />
-        <activity android:name=".view.reservation.BookSearchActivity"></activity>
+
+        <activity android:name=".view.reservation.BookSearchActivity"
+            android:label="@string/s_book_search"
+            android:screenOrientation="portrait"
+            android:theme="@style/SecondaryTheme"
+            ></activity>
     </application>
 
 </manifest>

@@ -82,4 +82,7 @@
     <string name="add_edit_book_label">Εγγραφή Βιβλίου</string>
 
     <string name="show_copies">Αντίτυπα</string>
+    <string name="manage_reservations">Κρατήσεις</string>
+    <string name="s_book_reservations">Κράτηση βιβλίου</string>
+    <string name="s_book_search">Αναζήτηση</string>
 </resources>
