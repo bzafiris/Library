@@ -22,5 +22,6 @@ public class BookReservationPresenter {
         } else {
             selectedBook = foundBook;
         }
+        view.showBookDetails(selectedBook);
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mgiandia.library.R;
+import com.mgiandia.library.domain.Book;
 import com.mgiandia.library.presenter.BookReservationPresenter;
 import com.mgiandia.library.presenter.BookReservationView;
 
@@ -25,6 +26,7 @@ public class BookReservationActivity extends AppCompatActivity
     Button btnReserveBook;
     EditText edtBorrowerId;
     TextView txtReservationStatus;
+    TextView txtBookInfo;
 
     BookReservationPresenter presenter;
 
@@ -42,6 +44,7 @@ public class BookReservationActivity extends AppCompatActivity
         edtAuthorName = findViewById(R.id.edt_author_name);
         edtBorrowerId = findViewById(R.id.edt_borrower_id);
         txtReservationStatus = findViewById(R.id.txt_reservation_status);
+        txtBookInfo = findViewById(R.id.txt_book_info);
 
         // Αρχικοποίηση στοιχείων UI
         txtReservationStatus.setText("");
@@ -113,6 +116,11 @@ public class BookReservationActivity extends AppCompatActivity
     @Override
     public void showError(String errorMsg) {
         // show error
+    }
+
+    @Override
+    public void showBookDetails(Book selectedBook) {
+        txtBookInfo.setText(selectedBook.getTitle());
     }
 }
 
