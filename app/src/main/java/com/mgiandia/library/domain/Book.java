@@ -1,5 +1,7 @@
 package com.mgiandia.library.domain;
 
+import com.mgiandia.library.util.SystemDate;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -215,6 +217,45 @@ public class Book {
         if (author != null) {
             author.removeBook(this);
         }
+    }
+
+
+    public Reservation reserve(Borrower b) {
+
+        if (b == null){
+            return null;
+        }
+
+        boolean itemsAvailable = hasAvailableItems();
+
+        if (itemsAvailable){
+            return null;
+        }
+
+        boolean isCurrentBorrower = b.hasPendingLoan(this);
+
+        if (isCurrentBorrower){
+            return null;
+        }
+
+        Reservation r = new Reservation();
+        r.setBook(this);
+        r.setBorrower(b);
+        r.setReservationDate(SystemDate.now());
+
+        return r;
+    }
+
+    private boolean hasAvailableItems() {
+        boolean itemsAvailable = false;
+
+        for(Item i: items){
+            if (i.getState().equals(ItemState.AVAILABLE)){
+                itemsAvailable = true;
+                break;
+            }
+        }
+        return itemsAvailable;
     }
 
     /**
