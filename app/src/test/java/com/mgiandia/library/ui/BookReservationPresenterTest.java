@@ -48,7 +48,7 @@ public class BookReservationPresenterTest {
         assertEquals("The Odyssey", view.getSearchResult());
 
         // enter borrower id and press reserve
-        int borrowerId = 2;
+        String borrowerId = "2";
         presenter.submitReservationRequest(borrowerId);
         assertEquals(0, view.getErrorCount());
 

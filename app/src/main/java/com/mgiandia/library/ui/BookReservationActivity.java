@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mgiandia.library.R;
@@ -18,7 +19,10 @@ public class BookReservationActivity extends AppCompatActivity implements BookRe
 
     private EditText edtTitle;
     private EditText edtAuthor;
+    private EditText edtBorrowerId;
     private Button btnSearch;
+    private Button btnReserve;
+    private TextView txtSearchResult;
     private BookReservationPresenter presenter;
 
     @Override
@@ -32,12 +36,22 @@ public class BookReservationActivity extends AppCompatActivity implements BookRe
 
         edtTitle = findViewById(R.id.edt_book_title);
         edtAuthor = findViewById(R.id.edt_author);
+        edtBorrowerId = findViewById(R.id.editBorrowerId);
         btnSearch = findViewById(R.id.btn_search);
+        btnReserve = findViewById(R.id.btnReserve);
+        txtSearchResult = findViewById(R.id.txtSearchResult);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.search(edtTitle.getText().toString(), edtAuthor.getText().toString());
+            }
+        });
+
+        btnReserve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.submitReservationRequest(edtBorrowerId.getText().toString());
             }
         });
 
@@ -68,7 +82,7 @@ public class BookReservationActivity extends AppCompatActivity implements BookRe
 
     @Override
     public void showSearchResult(String bookDescription) {
-
+        txtSearchResult.setText(bookDescription);
     }
 
 }

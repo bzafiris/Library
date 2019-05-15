@@ -1,5 +1,7 @@
 package com.mgiandia.library.ui;
 
+import android.content.Intent;
+
 import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.dao.BorrowerDAO;
 import com.mgiandia.library.dao.ReservationDAO;
@@ -42,10 +44,21 @@ public class BookReservationPresenter {
         }
     }
 
-    public void submitReservationRequest(int borrowerId) {
+    public void submitReservationRequest(String borrowerId) {
+
+        int id = -1;
+        try {
+
+            id = Integer.parseInt(borrowerId);
+
+        } catch (NumberFormatException e){
+            view.showError("Μη έγκυρος κωδικός δανειζομένου");
+            return;
+        }
+
         // search borrower by id
         BorrowerDAO dao = new BorrowerDAOMemory();
-        Borrower borrower = dao.find(borrowerId);
+        Borrower borrower = dao.find(id);
 
         if (borrower == null){
             view.showError("Ο κωδικός δανειζομένου δεν υπάρχει");
