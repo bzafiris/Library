@@ -85,4 +85,5 @@
     <string name="manage_reservations">Κρατήσεις</string>
     <string name="s_book_reservations">Κράτηση βιβλίου</string>
     <string name="s_book_search">Αναζήτηση</string>
+    <string name="title_activity_book_reservation">BookReservationActivity</string>
 </resources>

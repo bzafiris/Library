@@ -9,6 +9,11 @@
         android:supportsRtl="true"
         android:theme="@style/SecondaryTheme">
         <activity
+            android:name=".ui.BookReservationActivity"
+            android:exported="true"
+            android:label="@string/title_activity_book_reservation"
+            android:theme="@style/SecondaryTheme.NoActionBar"></activity>
+        <activity
             android:name=".view.HomePage.HomePageActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -118,16 +123,15 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".view.reservation.BookReservationActivity"
+            android:exported="true"
             android:label="@string/s_book_reservations"
             android:screenOrientation="portrait"
-            android:theme="@style/SecondaryTheme"
-            android:exported="true" />
-
-        <activity android:name=".view.reservation.BookSearchActivity"
+            android:theme="@style/SecondaryTheme" />
+        <activity
+            android:name=".view.reservation.BookSearchActivity"
             android:label="@string/s_book_search"
             android:screenOrientation="portrait"
-            android:theme="@style/SecondaryTheme"
-            ></activity>
+            android:theme="@style/SecondaryTheme" />
     </application>
 
 </manifest>
