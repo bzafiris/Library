@@ -10,11 +10,25 @@ import java.util.Set;
 
 public class BookSearchPresenter {
 
+    private BookSearchView view;
+
+    public BookSearchPresenter(BookSearchView view) {
+        this.view = view;
+    }
+
     public Set<Book> searchBooks(String title, String authorName){
 
-        BookDAOMemory bookDAOMemory = new BookDAOMemory();
-        List<Book> resultA = bookDAOMemory.findByTitle(title);
-        List<Book> resultB = bookDAOMemory.findByAuthorName(authorName);
+        List<Book> resultA = new ArrayList<>();
+        List<Book> resultB = new ArrayList<>();
+
+                BookDAOMemory bookDAOMemory = new BookDAOMemory();
+        if (!title.isEmpty()){
+            resultA.addAll(bookDAOMemory.findByTitle(title));
+        }
+
+        if (!authorName.isEmpty()){
+            resultB.addAll(bookDAOMemory.findByAuthorName(authorName));
+        }
 
         Set<Book> result = new HashSet<>();
         result.addAll(resultA);
@@ -23,4 +37,7 @@ public class BookSearchPresenter {
 
     }
 
+    public void onBookSelected(Book b){
+        view.returnSearchResult(b.getId());
+    }
 }

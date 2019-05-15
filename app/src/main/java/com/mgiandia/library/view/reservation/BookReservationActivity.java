@@ -35,6 +35,7 @@ public class BookReservationActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_reservation);
 
+        // Uncomment to use the activity standalone
         Initializer initializer = new MemoryInitializer();
         initializer.prepareData();
 

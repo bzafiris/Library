@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class BookSearchActivity extends AppCompatActivity
-        implements ItemSelectionListener<Book> {
+        implements ItemSelectionListener<Book>, BookSearchView {
 
     public static final String BOOK_ID_EXTRA = "book_id";
-    public static final String BOOK_DESCRIPTION_EXTRA = "book_description";
+
     RecyclerView recyclerView;
     private BookAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -30,11 +30,11 @@ public class BookSearchActivity extends AppCompatActivity
 
         Intent intent = getIntent();
 
+        // extract search criteria from intent
         String title = intent.getStringExtra(BookReservationActivity.BOOK_TITLE_EXTRA);
         String authorName = intent.getStringExtra(BookReservationActivity.AUTHOR_NAME_EXTRA);
-
-
-        bookSearchPresenter = new BookSearchPresenter();
+        // find search result
+        bookSearchPresenter = new BookSearchPresenter(this);
         Set<Book> result = bookSearchPresenter.searchBooks(title, authorName);
 
         // Update UI with the result
@@ -63,15 +63,16 @@ public class BookSearchActivity extends AppCompatActivity
      */
     @Override
     public void onItemSelected(Book item) {
+        bookSearchPresenter.onBookSelected(item);
+    }
 
+    @Override
+    public void returnSearchResult(int id) {
         // return result to calling Activity
-        Toast.makeText(this, "Selected book:" + item.getTitle(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
-        intent.putExtra(BOOK_ID_EXTRA, item.getId());
-        intent.putExtra(BOOK_DESCRIPTION_EXTRA, item.toString());
+        intent.putExtra(BOOK_ID_EXTRA, id);
         setResult(RESULT_OK, intent);
         // close activity
         finish();
-
     }
 }
