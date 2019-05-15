@@ -1,5 +1,6 @@
 package com.mgiandia.library.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mgiandia.library.R;
+import com.mgiandia.library.view.reservation.BookSearchActivity;
 
 public class BookReservationActivity extends AppCompatActivity implements BookReservationView {
 
@@ -52,6 +54,21 @@ public class BookReservationActivity extends AppCompatActivity implements BookRe
     @Override
     public void showError(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showSearchView(String title, String author) {
+
+        Intent intent = new Intent(this, BookSearchActivity.class);
+        intent.putExtra("BOOK_TITLE_EXTRA", title);
+        intent.putExtra("BOOK_AUTHOR_EXTRA", author);
+        startActivityForResult(intent, 1);
+
+    }
+
+    @Override
+    public void showSearchResult(String bookDescription) {
+
     }
 
 }

@@ -1,5 +1,8 @@
 package com.mgiandia.library.ui;
 
+import com.mgiandia.library.dao.Initializer;
+import com.mgiandia.library.memorydao.MemoryInitializer;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,13 +17,23 @@ public class BookReservationPresenterTest {
     public void setup(){
         view = new BookReservationViewStub();
         presenter = new BookReservationPresenter(view);
+        Initializer initializer = new MemoryInitializer();
+        initializer.prepareData();
     }
 
     @Test
-    public void search() {
+    public void showSearchResult_onSuccessfulSearch() {
 
-        presenter.search(null, null);
-        assertEquals(1, view.getErrorCount());
+        // check interaction with view
+        presenter.search("UML", "Fowler");
+        assertEquals(0, view.getErrorCount());
+        assertEquals("UML", view.getTitle());
+        assertEquals("Fowler", view.getAuthor());
+
+        // set search result
+        int bookId = 3;
+        presenter.setSearchResult(bookId);
+        assertEquals("UML Distilled", view.getSearchResult());
 
     }
 }
