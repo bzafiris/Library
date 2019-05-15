@@ -17,7 +17,21 @@ public class ReservationDAOMemory implements ReservationDAO {
         }
     }
 
+    @Override
+    public Reservation find(int borrowerId, int bookId) {
+        for(Reservation r: reservations){
+            if (r.getBook().getId() == bookId && r.getBorrower().getBorrowerNo() == borrowerId){
+                return r;
+            }
+        }
+        return null;
+    }
+
     public List<Reservation> findAll(){
         return reservations;
+    }
+
+    public static void reset(){
+        reservations.clear();
     }
 }

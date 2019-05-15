@@ -10,7 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mgiandia.library.R;
+import com.mgiandia.library.dao.Initializer;
 import com.mgiandia.library.domain.Book;
+import com.mgiandia.library.memorydao.MemoryInitializer;
 
 public class BookReservationActivity extends AppCompatActivity
         implements BookReservationView {
@@ -32,6 +34,9 @@ public class BookReservationActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_reservation);
+
+        Initializer initializer = new MemoryInitializer();
+        initializer.prepareData();
 
         presenter = new BookReservationPresenter(this);
 
@@ -87,6 +92,11 @@ public class BookReservationActivity extends AppCompatActivity
     @Override
     public void showError(String errorMsg) {
         Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showStatus(String msg) {
+        txtReservationStatus.setText(msg);
     }
 
     @Override

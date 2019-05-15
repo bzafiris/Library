@@ -16,6 +16,11 @@ public class BookReservationViewStub implements BookReservationView {
     }
 
     @Override
+    public void showStatus(String msg) {
+
+    }
+
+    @Override
     public void showSearchView(String title, String author) {
 
         this.title = title;

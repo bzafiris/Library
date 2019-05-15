@@ -22,7 +22,7 @@ public class BookReservationPresenter {
     }
 
     public void search(String title, String author){
-        if (title.isEmpty() || author.isEmpty()){
+        if (title.isEmpty() && author.isEmpty()){
             view.showError("Παρακαλώ συμπληρώστε ένα από τα πεδία");
             return;
         }
@@ -54,9 +54,7 @@ public class BookReservationPresenter {
 
         int id = -1;
         try {
-
             id = Integer.parseInt(borrowerId);
-
         } catch (NumberFormatException e){
             view.showError("Μη έγκυρος κωδικός δανειζομένου");
             return;
@@ -75,6 +73,14 @@ public class BookReservationPresenter {
             view.showError("Δεν έχει γίνει επιλογή βιβλίου");
             return;
         }
+        // check if reservation exists
+        ReservationDAO reservationDAO = new ReservationDAOMemory();
+        Reservation foundReservation = reservationDAO.find(id, book.getId());
+
+        if (foundReservation != null){
+            view.showError("Υπάρχει ήδη κράτηση του βιβλίου για τον δανειζόμενο");
+            return;
+        }
 
         Reservation r = book.reserve(borrower);
         if (r == null){
@@ -83,8 +89,9 @@ public class BookReservationPresenter {
         }
 
         // save reservation with ReservationDAO
-        ReservationDAO reservationDAO = new ReservationDAOMemory();
         reservationDAO.save(r);
+
+        view.showStatus("Η κράτηση έγινε με επιτυχία");
 
     }
 }

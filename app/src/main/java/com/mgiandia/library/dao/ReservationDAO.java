@@ -6,4 +6,6 @@ public interface ReservationDAO {
 
     void save(Reservation reservation);
 
+    Reservation find(int borrowerId, int bookId);
+
 }

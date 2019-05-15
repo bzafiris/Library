@@ -20,6 +20,9 @@ public class BookReservationPresenterTest {
         presenter = new BookReservationPresenter(view);
         Initializer initializer = new MemoryInitializer();
         initializer.prepareData();
+
+        // the following code should move to Initializer.eraseData()
+        ReservationDAOMemory.reset();
     }
 
     @Test
@@ -41,18 +44,29 @@ public class BookReservationPresenterTest {
     @Test
     public void testSuccessfulReservation(){
 
+        // resuse test code
+        makeReservationRequest(2, "2");
+        ReservationDAOMemory dao = new ReservationDAOMemory();
+        assertEquals(1, dao.findAll().size());
+    }
+
+    private void makeReservationRequest(int bookId, String borrowerId){
         // set search result
-        int bookId = 2;
         presenter.setSearchResult(bookId);
         assertEquals("The Odyssey", view.getSearchResult());
 
         // enter borrower id and press reserve
-        String borrowerId = "2";
         presenter.submitReservationRequest(borrowerId);
         assertEquals(0, view.getErrorCount());
+    }
 
-        // check saved reservation
+    @Test
+    public void denyDuplicateReservations(){
 
+        makeReservationRequest(2, "2");
+        // make again the same reservation
+        presenter.submitReservationRequest("2");
+        assertEquals(1, view.getErrorCount());
         ReservationDAOMemory dao = new ReservationDAOMemory();
         assertEquals(1, dao.findAll().size());
     }
