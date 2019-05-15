@@ -53,9 +53,7 @@ public class BookReservationActivity extends AppCompatActivity
             public void onClick(View v) {
                 String bookTitle = edtBookTitle.getText().toString();
                 String authorName = edtAuthorName.getText().toString();
-                searchBook(bookTitle, authorName);
-                // κλήση μεθόδου searchBook στον presenter με παραμέτρους
-                // τα στοιχεία αναζήτησης
+                presenter.search(bookTitle, authorName);
             }
         });
 
@@ -63,25 +61,11 @@ public class BookReservationActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 String borrowerId = edtBorrowerId.getText().toString();
-                // κλήση μεθόδου reserve στον presenter με παραμέτρο
-                // borrowerId.
+                presenter.submitReservationRequest(borrowerId);
             }
         });
 
     }
-
-    /**
-     * Start BookSearchActivity for search and book selection
-     * @param bookTitle
-     * @param authorName
-     */
-    public void searchBook(String bookTitle, String authorName){
-        Intent intent = new Intent(this, BookSearchActivity.class);
-        intent.putExtra(BOOK_TITLE_EXTRA, bookTitle);
-        intent.putExtra(AUTHOR_NAME_EXTRA, authorName);
-        startActivityForResult(intent, REQUEST_CODE_BOOK_SEARCH);
-    }
-
 
     /**
      * Handle the result from BookSearchActivity
@@ -94,31 +78,28 @@ public class BookReservationActivity extends AppCompatActivity
 
         if (requestCode == REQUEST_CODE_BOOK_SEARCH){
             if (resultCode == RESULT_OK){
-
                 int bookId = data.getIntExtra(BookSearchActivity.BOOK_ID_EXTRA, -1);
-                String bookDescription = data.getStringExtra(BookSearchActivity.BOOK_DESCRIPTION_EXTRA);
-
-                if (bookId == -1){
-                    Toast.makeText(this, "Book not found", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Selected book: " + bookDescription, Toast.LENGTH_SHORT).show();
-                    presenter.selectBook(bookId);
-                    // presenter load book with id
-                }
-
+                presenter.setSearchResult(bookId);
             }
         }
-
     }
 
     @Override
     public void showError(String errorMsg) {
-        // show error
+        Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void showBookDetails(Book selectedBook) {
-        txtBookInfo.setText(selectedBook.getTitle());
+    public void showSearchView(String title, String author) {
+        Intent intent = new Intent(this, BookSearchActivity.class);
+        intent.putExtra(BOOK_TITLE_EXTRA, title);
+        intent.putExtra(AUTHOR_NAME_EXTRA, author);
+        startActivityForResult(intent, REQUEST_CODE_BOOK_SEARCH);
+    }
+
+    @Override
+    public void showSearchResult(String bookDescription) {
+        txtBookInfo.setText(bookDescription);
     }
 }
 

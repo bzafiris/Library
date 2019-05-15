@@ -1,7 +1,6 @@
-package com.mgiandia.library.ui;
+package com.mgiandia.library.view.reservation;
 
 import com.mgiandia.library.dao.Initializer;
-import com.mgiandia.library.dao.ReservationDAO;
 import com.mgiandia.library.memorydao.MemoryInitializer;
 import com.mgiandia.library.memorydao.ReservationDAOMemory;
 

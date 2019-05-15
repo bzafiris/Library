@@ -1,4 +1,6 @@
-package com.mgiandia.library.ui;
+package com.mgiandia.library.view.reservation;
+
+import com.mgiandia.library.view.reservation.BookReservationView;
 
 public class BookReservationViewStub implements BookReservationView {
 

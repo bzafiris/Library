@@ -9,11 +9,6 @@
         android:supportsRtl="true"
         android:theme="@style/SecondaryTheme">
         <activity
-            android:name=".ui.BookReservationActivity"
-            android:exported="true"
-            android:label="@string/title_activity_book_reservation"
-            android:theme="@style/SecondaryTheme.NoActionBar"></activity>
-        <activity
             android:name=".view.HomePage.HomePageActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"

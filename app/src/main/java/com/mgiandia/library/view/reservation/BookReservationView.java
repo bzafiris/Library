@@ -1,9 +1,9 @@
 package com.mgiandia.library.view.reservation;
 
-import com.mgiandia.library.domain.Book;
-
 public interface BookReservationView {
-    void showError(String errorMsg);
+    void showError(String msg);
 
-    void showBookDetails(Book selectedBook);
+    void showSearchView(String title, String author);
+
+    void showSearchResult(String bookDescription);
 }
