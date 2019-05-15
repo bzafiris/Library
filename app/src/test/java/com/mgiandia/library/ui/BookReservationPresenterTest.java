@@ -1,7 +1,9 @@
 package com.mgiandia.library.ui;
 
 import com.mgiandia.library.dao.Initializer;
+import com.mgiandia.library.dao.ReservationDAO;
 import com.mgiandia.library.memorydao.MemoryInitializer;
+import com.mgiandia.library.memorydao.ReservationDAOMemory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,9 +33,28 @@ public class BookReservationPresenterTest {
         assertEquals("Fowler", view.getAuthor());
 
         // set search result
-        int bookId = 3;
+        int bookId = 2;
         presenter.setSearchResult(bookId);
-        assertEquals("UML Distilled", view.getSearchResult());
+        assertEquals("The Odyssey", view.getSearchResult());
 
+    }
+
+    @Test
+    public void testSuccessfulReservation(){
+
+        // set search result
+        int bookId = 2;
+        presenter.setSearchResult(bookId);
+        assertEquals("The Odyssey", view.getSearchResult());
+
+        // enter borrower id and press reserve
+        int borrowerId = 2;
+        presenter.submitReservationRequest(borrowerId);
+        assertEquals(0, view.getErrorCount());
+
+        // check saved reservation
+
+        ReservationDAOMemory dao = new ReservationDAOMemory();
+        assertEquals(1, dao.findAll().size());
     }
 }
