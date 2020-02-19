@@ -46,7 +46,7 @@ public class LoanService {
         if (borrower == null) {
             throw new LibraryException();
         }
-        if (itemNo == -1 || !borrower.canBorrow()) {
+        if (!borrower.canBorrow()) {
             return null;
         }
         ItemDAO itemDao = new ItemDAOMemory();
