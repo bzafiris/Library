@@ -47,7 +47,6 @@ public class LoanService {
             throw new LibraryException();
         }
         if (!borrower.canBorrow()) {
-            System.out.println("The borrower cannot currently borrow any items");
             return null;
         }
         ItemDAO itemDao = new ItemDAOMemory();
