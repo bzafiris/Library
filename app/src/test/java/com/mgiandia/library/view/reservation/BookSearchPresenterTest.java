@@ -22,7 +22,8 @@ public class BookSearchPresenterTest {
         initializer.prepareData();
 
         view = new BookSearchViewStub();
-        presenter = new BookSearchPresenter(view);
+        presenter = new BookSearchPresenter();
+        presenter.setView(view);
     }
 
     @Test

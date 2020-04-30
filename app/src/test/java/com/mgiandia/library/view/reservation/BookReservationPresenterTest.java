@@ -17,7 +17,8 @@ public class BookReservationPresenterTest {
     @Before
     public void setup(){
         view = new BookReservationViewStub();
-        presenter = new BookReservationPresenter(view);
+        presenter = new BookReservationPresenter();
+        presenter.setView(view);
         Initializer initializer = new MemoryInitializer();
         initializer.prepareData();
 
