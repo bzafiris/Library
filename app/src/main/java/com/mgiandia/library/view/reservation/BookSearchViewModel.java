@@ -1,5 +1,7 @@
 package com.mgiandia.library.view.reservation;
 
+import com.mgiandia.library.memorydao.BookDAOMemory;
+
 import androidx.lifecycle.ViewModel;
 
 public class BookSearchViewModel extends ViewModel {
@@ -10,6 +12,9 @@ public class BookSearchViewModel extends ViewModel {
 
         // assemble presenter here
         presenter = new BookSearchPresenter();
+        BookDAOMemory bookDAOMemory = new BookDAOMemory();
+        presenter.setBookDAO(bookDAOMemory);
+
     }
 
 

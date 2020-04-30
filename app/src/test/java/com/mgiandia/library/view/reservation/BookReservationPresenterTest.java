@@ -1,6 +1,8 @@
 package com.mgiandia.library.view.reservation;
 
 import com.mgiandia.library.dao.Initializer;
+import com.mgiandia.library.memorydao.BookDAOMemory;
+import com.mgiandia.library.memorydao.BorrowerDAOMemory;
 import com.mgiandia.library.memorydao.MemoryInitializer;
 import com.mgiandia.library.memorydao.ReservationDAOMemory;
 
@@ -16,12 +18,17 @@ public class BookReservationPresenterTest {
 
     @Before
     public void setup(){
-        view = new BookReservationViewStub();
-        presenter = new BookReservationPresenter();
-        presenter.setView(view);
+
         Initializer initializer = new MemoryInitializer();
         initializer.prepareData();
 
+        view = new BookReservationViewStub();
+        presenter = new BookReservationPresenter();
+        presenter.setView(view);
+        presenter.setBorrowerDAO(new BorrowerDAOMemory());
+        presenter.setBookDAO(new BookDAOMemory());
+        presenter.setReservationDAO(new ReservationDAOMemory());
+        
         // the following code should move to Initializer.eraseData()
         ReservationDAOMemory.reset();
     }

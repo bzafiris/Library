@@ -1,14 +1,11 @@
 package com.mgiandia.library.view.reservation;
 
-import android.content.Intent;
-
 import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.dao.BorrowerDAO;
 import com.mgiandia.library.dao.ReservationDAO;
 import com.mgiandia.library.domain.Book;
 import com.mgiandia.library.domain.Borrower;
 import com.mgiandia.library.domain.Reservation;
-import com.mgiandia.library.memorydao.BookDAOMemory;
 import com.mgiandia.library.memorydao.BorrowerDAOMemory;
 import com.mgiandia.library.memorydao.ReservationDAOMemory;
 
@@ -16,6 +13,9 @@ public class BookReservationPresenter {
 
     private BookReservationView view;
     private Book book;
+    private BookDAO bookDAO;
+    private ReservationDAO reservationDAO;
+    private BorrowerDAO borrowerDAO;
 
     public BookReservationPresenter() {}
 
@@ -37,8 +37,7 @@ public class BookReservationPresenter {
             return;
         }
 
-        BookDAO dao = new BookDAOMemory();
-        book = dao.find(bookId);
+        book = bookDAO.find(bookId);
 
         if (book != null){
             String bookDescription = book.getTitle();
@@ -59,8 +58,7 @@ public class BookReservationPresenter {
         }
 
         // search borrower by id
-        BorrowerDAO dao = new BorrowerDAOMemory();
-        Borrower borrower = dao.find(id);
+        Borrower borrower = borrowerDAO.find(id);
 
         if (borrower == null){
             view.showError("Ο κωδικός δανειζομένου δεν υπάρχει");
@@ -72,7 +70,6 @@ public class BookReservationPresenter {
             return;
         }
         // check if reservation exists
-        ReservationDAO reservationDAO = new ReservationDAOMemory();
         Reservation foundReservation = reservationDAO.find(id, book.getId());
 
         if (foundReservation != null){
@@ -99,5 +96,17 @@ public class BookReservationPresenter {
 
     public void clearView(){
         this.view = null;
+    }
+
+    public void setBookDAO(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
+    }
+
+    public void setReservationDAO(ReservationDAO reservationDAO) {
+        this.reservationDAO = reservationDAO;
+    }
+
+    public void setBorrowerDAO(BorrowerDAO borrowerDAO) {
+        this.borrowerDAO = borrowerDAO;
     }
 }

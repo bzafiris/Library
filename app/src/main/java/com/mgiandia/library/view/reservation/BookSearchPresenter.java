@@ -1,5 +1,6 @@
 package com.mgiandia.library.view.reservation;
 
+import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.domain.Book;
 import com.mgiandia.library.memorydao.BookDAOMemory;
 
@@ -11,6 +12,7 @@ import java.util.Set;
 public class BookSearchPresenter {
 
     private BookSearchView view;
+    private BookDAO bookDAO;
 
     public BookSearchPresenter() {
     }
@@ -20,13 +22,12 @@ public class BookSearchPresenter {
         List<Book> resultA = new ArrayList<>();
         List<Book> resultB = new ArrayList<>();
 
-                BookDAOMemory bookDAOMemory = new BookDAOMemory();
         if (!title.isEmpty()){
-            resultA.addAll(bookDAOMemory.findByTitle(title));
+            resultA.addAll(bookDAO.findByTitle(title));
         }
 
         if (!authorName.isEmpty()){
-            resultB.addAll(bookDAOMemory.findByAuthorName(authorName));
+            resultB.addAll(bookDAO.findByAuthorName(authorName));
         }
 
         Set<Book> result = new HashSet<>();
@@ -46,5 +47,9 @@ public class BookSearchPresenter {
 
     public void clearView(){
         this.view = null;
+    }
+
+    public void setBookDAO(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
     }
 }

@@ -2,6 +2,7 @@ package com.mgiandia.library.view.reservation;
 
 import com.mgiandia.library.dao.Initializer;
 import com.mgiandia.library.domain.Book;
+import com.mgiandia.library.memorydao.BookDAOMemory;
 import com.mgiandia.library.memorydao.MemoryInitializer;
 
 import org.junit.Before;
@@ -23,6 +24,7 @@ public class BookSearchPresenterTest {
 
         view = new BookSearchViewStub();
         presenter = new BookSearchPresenter();
+        presenter.setBookDAO(new BookDAOMemory());
         presenter.setView(view);
     }
 
