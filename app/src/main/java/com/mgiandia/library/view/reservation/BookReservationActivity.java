@@ -2,6 +2,8 @@ package com.mgiandia.library.view.reservation;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,8 +41,9 @@ public class BookReservationActivity extends AppCompatActivity
         Initializer initializer = new MemoryInitializer();
         initializer.prepareData();
 
-        presenter = new BookReservationPresenter(this);
-        Log.d("BookReservationActivity", "Creating presenter");
+        BookReservationViewModel model = new ViewModelProvider(this).get(BookReservationViewModel.class);
+        presenter = model.getPresenter();
+        presenter.setView(this);
 
         // Πρόσβαση σε αντικείμενα της διεπαφής χρήστη
         btnSearchBook = findViewById(R.id.btn_search_book);

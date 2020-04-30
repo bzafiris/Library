@@ -12,8 +12,7 @@ public class BookSearchPresenter {
 
     private BookSearchView view;
 
-    public BookSearchPresenter(BookSearchView view) {
-        this.view = view;
+    public BookSearchPresenter() {
     }
 
     public Set<Book> searchBooks(String title, String authorName){
@@ -39,5 +38,13 @@ public class BookSearchPresenter {
 
     public void onBookSelected(Book b){
         view.returnSearchResult(b.getId());
+    }
+
+    public void setView(BookSearchView view) {
+        this.view = view;
+    }
+
+    public void clearView(){
+        this.view = null;
     }
 }

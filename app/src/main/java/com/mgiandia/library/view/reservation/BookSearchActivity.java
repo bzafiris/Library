@@ -3,6 +3,8 @@ package com.mgiandia.library.view.reservation;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,12 @@ public class BookSearchActivity extends AppCompatActivity
         String title = intent.getStringExtra(BookReservationActivity.BOOK_TITLE_EXTRA);
         String authorName = intent.getStringExtra(BookReservationActivity.AUTHOR_NAME_EXTRA);
         // find search result
-        bookSearchPresenter = new BookSearchPresenter(this);
+
+        BookSearchViewModel model = new ViewModelProvider(this).get(BookSearchViewModel.class);
+        bookSearchPresenter = model.getPresenter();
+        bookSearchPresenter.setView(this);
+
+
         Set<Book> result = bookSearchPresenter.searchBooks(title, authorName);
 
         // Update UI with the result

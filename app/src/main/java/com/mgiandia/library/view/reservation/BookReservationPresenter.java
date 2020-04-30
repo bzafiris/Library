@@ -17,9 +17,7 @@ public class BookReservationPresenter {
     private BookReservationView view;
     private Book book;
 
-    public BookReservationPresenter(BookReservationView view) {
-        this.view = view;
-    }
+    public BookReservationPresenter() {}
 
     public void search(String title, String author){
         if (title.isEmpty() && author.isEmpty()){
@@ -93,5 +91,13 @@ public class BookReservationPresenter {
 
         view.showStatus("Η κράτηση έγινε με επιτυχία");
 
+    }
+
+    public void setView(BookReservationView view) {
+        this.view = view;
+    }
+
+    public void clearView(){
+        this.view = null;
     }
 }
