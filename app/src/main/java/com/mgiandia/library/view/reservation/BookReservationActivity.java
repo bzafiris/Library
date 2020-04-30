@@ -1,8 +1,9 @@
 package com.mgiandia.library.view.reservation;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +12,6 @@ import android.widget.Toast;
 
 import com.mgiandia.library.R;
 import com.mgiandia.library.dao.Initializer;
-import com.mgiandia.library.domain.Book;
 import com.mgiandia.library.memorydao.MemoryInitializer;
 
 public class BookReservationActivity extends AppCompatActivity
@@ -40,6 +40,7 @@ public class BookReservationActivity extends AppCompatActivity
         initializer.prepareData();
 
         presenter = new BookReservationPresenter(this);
+        Log.d("BookReservationActivity", "Creating presenter");
 
         // Πρόσβαση σε αντικείμενα της διεπαφής χρήστη
         btnSearchBook = findViewById(R.id.btn_search_book);

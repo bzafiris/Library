@@ -1,6 +1,5 @@
 package com.mgiandia.library.view.reservation;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,8 @@ import com.mgiandia.library.R;
 import com.mgiandia.library.domain.Book;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 

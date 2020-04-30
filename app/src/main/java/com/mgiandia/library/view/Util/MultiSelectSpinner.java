@@ -15,7 +15,7 @@ import java.util.List;
  *
  */
 
-public class MultiSelectSpinner extends android.support.v7.widget.AppCompatSpinner implements DialogInterface.OnMultiChoiceClickListener, DialogInterface.OnCancelListener
+public class MultiSelectSpinner extends androidx.appcompat.widget.AppCompatSpinner implements DialogInterface.OnMultiChoiceClickListener, DialogInterface.OnCancelListener
 {
     private List<String> items;
     private boolean[] selectedIndexes;

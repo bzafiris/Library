@@ -2,7 +2,7 @@ package com.mgiandia.library.view.HomePage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.mgiandia.library.R;
