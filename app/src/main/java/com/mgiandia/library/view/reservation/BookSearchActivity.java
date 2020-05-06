@@ -23,7 +23,8 @@ public class BookSearchActivity extends AppCompatActivity
     RecyclerView recyclerView;
     private BookAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private BookSearchPresenter bookSearchPresenter;
+    private BookSearchViewModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,8 @@ public class BookSearchActivity extends AppCompatActivity
         String authorName = intent.getStringExtra(BookReservationActivity.AUTHOR_NAME_EXTRA);
         // find search result
 
-        BookSearchViewModel model = new ViewModelProvider(this).get(BookSearchViewModel.class);
-        bookSearchPresenter = model.getPresenter();
+        viewModel = new ViewModelProvider(this).get(BookSearchViewModel.class);
+        BookSearchPresenter bookSearchPresenter = viewModel.getPresenter();
         bookSearchPresenter.setView(this);
 
         Log.d("BookSearchActivity", "Search request <" + title + ", " + authorName + ">" );
@@ -71,7 +72,7 @@ public class BookSearchActivity extends AppCompatActivity
      */
     @Override
     public void onItemSelected(Book item) {
-        bookSearchPresenter.onBookSelected(item);
+        viewModel.getPresenter().onBookSelected(item);
     }
 
     @Override

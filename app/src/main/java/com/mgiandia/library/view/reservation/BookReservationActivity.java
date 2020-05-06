@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,8 +28,7 @@ public class BookReservationActivity extends AppCompatActivity
     EditText edtBorrowerId;
     TextView txtReservationStatus;
     TextView txtBookInfo;
-
-    BookReservationPresenter presenter;
+    private BookReservationViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +39,8 @@ public class BookReservationActivity extends AppCompatActivity
         Initializer initializer = new MemoryInitializer();
         initializer.prepareData();
 
-        BookReservationViewModel model = new ViewModelProvider(this).get(BookReservationViewModel.class);
-        presenter = model.getPresenter();
+        viewModel = new ViewModelProvider(this).get(BookReservationViewModel.class);
+        final BookReservationPresenter presenter = viewModel.getPresenter();
         presenter.setView(this);
 
         // Πρόσβαση σε αντικείμενα της διεπαφής χρήστη
@@ -89,7 +87,7 @@ public class BookReservationActivity extends AppCompatActivity
         if (requestCode == REQUEST_CODE_BOOK_SEARCH){
             if (resultCode == RESULT_OK){
                 int bookId = data.getIntExtra(BookSearchActivity.BOOK_ID_EXTRA, -1);
-                presenter.setSearchResult(bookId);
+                viewModel.getPresenter().setSearchResult(bookId);
             }
         }
     }
