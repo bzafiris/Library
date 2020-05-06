@@ -3,6 +3,7 @@ package com.mgiandia.library.view.reservation;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,6 +41,7 @@ public class BookSearchActivity extends AppCompatActivity
         bookSearchPresenter = model.getPresenter();
         bookSearchPresenter.setView(this);
 
+        Log.d("BookSearchActivity", "Search request <" + title + ", " + authorName + ">" );
 
         Set<Book> result = bookSearchPresenter.searchBooks(title, authorName);
 

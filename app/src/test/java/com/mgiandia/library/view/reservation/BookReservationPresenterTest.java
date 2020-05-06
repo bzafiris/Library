@@ -28,7 +28,7 @@ public class BookReservationPresenterTest {
         presenter.setBorrowerDAO(new BorrowerDAOMemory());
         presenter.setBookDAO(new BookDAOMemory());
         presenter.setReservationDAO(new ReservationDAOMemory());
-        
+
         // the following code should move to Initializer.eraseData()
         ReservationDAOMemory.reset();
     }
