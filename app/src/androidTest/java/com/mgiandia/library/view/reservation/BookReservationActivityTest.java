@@ -40,7 +40,6 @@ public class BookReservationActivityTest {
     @Test
     public void makeSuccessfulReservation() throws InterruptedException {
 
-
         onView(withId(R.id.edt_book_title)).perform(clearText());
         onView(withId(R.id.edt_book_title)).perform(typeText("The Odyssey"));
 

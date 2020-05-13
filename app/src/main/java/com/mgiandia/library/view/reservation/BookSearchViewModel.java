@@ -1,9 +1,6 @@
 package com.mgiandia.library.view.reservation;
 
-import android.util.Log;
-
 import com.mgiandia.library.memorydao.BookDAOMemory;
-
 import androidx.lifecycle.ViewModel;
 
 public class BookSearchViewModel extends ViewModel {
