@@ -1,30 +1,25 @@
 package com.mgiandia.library.view.reservation;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.mgiandia.library.R;
 import com.mgiandia.library.domain.Book;
+import com.mgiandia.library.view.reservation.search.BookListFragment;
 
-import java.util.ArrayList;
 import java.util.Set;
 
-public class BookSearchActivity extends AppCompatActivity
-        implements ItemSelectionListener<Book>, BookSearchView {
+import static com.mgiandia.library.view.reservation.BookReservationActivity.AUTHOR_NAME_EXTRA;
+import static com.mgiandia.library.view.reservation.BookReservationActivity.BOOK_TITLE_EXTRA;
 
-    public static final String BOOK_ID_EXTRA = "book_id";
+public class BookSearchActivity extends AppCompatActivity implements BookListFragment.OnListFragmentInteractionListener {
 
-    RecyclerView recyclerView;
-    private BookAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private BookSearchViewModel viewModel;
-
+    public static final String BOOK_ID_EXTRA = "book_id_extra";
+    BookSearchViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,56 +27,40 @@ public class BookSearchActivity extends AppCompatActivity
         setContentView(R.layout.activity_book_search);
 
         Intent intent = getIntent();
+        String titleCriterion = intent.getStringExtra(BOOK_TITLE_EXTRA);
+        String authorCriterion = intent.getStringExtra(AUTHOR_NAME_EXTRA);
 
-        // extract search criteria from intent
-        String title = intent.getStringExtra(BookReservationActivity.BOOK_TITLE_EXTRA);
-        String authorName = intent.getStringExtra(BookReservationActivity.AUTHOR_NAME_EXTRA);
-        // find search result
+        Log.d("BookSearchActivity", "Search criteria: " + titleCriterion
+                + " " + authorCriterion);
 
         viewModel = new ViewModelProvider(this).get(BookSearchViewModel.class);
-        BookSearchPresenter bookSearchPresenter = viewModel.getPresenter();
-        bookSearchPresenter.setView(this);
 
-        Log.d("BookSearchActivity", "Search request <" + title + ", " + authorName + ">" );
+        if (findViewById(R.id.fragment_container) != null){
 
-        Set<Book> result = bookSearchPresenter.searchBooks(title, authorName);
+            if (savedInstanceState != null){
+                return;
+            }
 
-        // Update UI with the result
+            viewModel.getPresenter().searchBooks(titleCriterion, authorCriterion);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
+            BookListFragment bookListFragment = BookListFragment.newInstance(1);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, bookListFragment)
+                    .commit();
+        }
 
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-        mAdapter = new BookAdapter(new ArrayList<Book>(result));
-        recyclerView.setAdapter(mAdapter);
-        // register the current activity as listener for book selection events
-        mAdapter.setBookSelectionListener(this);
-    }
-
-    /**
-     * The method will be called by the adapter, whenever the user clicks on a list item
-     * @param item
-     *
-     *
-     */
-    @Override
-    public void onItemSelected(Book item) {
-        viewModel.getPresenter().onBookSelected(item);
     }
 
     @Override
-    public void returnSearchResult(int id) {
-        // return result to calling Activity
+    public void onListFragmentInteraction(Book item) {
         Intent intent = new Intent();
-        intent.putExtra(BOOK_ID_EXTRA, id);
+        intent.putExtra(BOOK_ID_EXTRA, item.getId());
         setResult(RESULT_OK, intent);
-        // close activity
-        finish();
+        onBackPressed();
+    }
+
+    @Override
+    public Set<Book> getBookList() {
+        return viewModel.getPresenter().getResults();
     }
 }
