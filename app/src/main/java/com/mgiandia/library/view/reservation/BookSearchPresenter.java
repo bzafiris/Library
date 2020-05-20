@@ -12,7 +12,7 @@ public class BookSearchPresenter {
 
     private BookSearchView view;
     private BookDAO bookDAO;
-    private Set<Book> results;
+    private Set<Book> results = new HashSet<>();
 
     public BookSearchPresenter() {
     }

@@ -37,6 +37,7 @@ public class BookSearchActivity extends AppCompatActivity implements BookListFra
 
         if (findViewById(R.id.fragment_container) != null){
 
+            // Activity is recreated, do not add fragment twice
             if (savedInstanceState != null){
                 return;
             }

@@ -31,7 +31,8 @@ public class BookSearchPresenterTest {
     @Test
     public void testSearch(){
 
-        Set<Book> books = presenter.searchBooks("UML", "");
+        presenter.searchBooks("UML", "");
+        Set<Book> books = presenter.getResults();
         assertEquals(2, books.size());
 
         Book selected = books.iterator().next();
