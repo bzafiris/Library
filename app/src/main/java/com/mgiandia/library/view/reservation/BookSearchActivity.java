@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.mgiandia.library.R;
 import com.mgiandia.library.domain.Book;
-import com.mgiandia.library.view.reservation.search.BookListFragment;
+import com.mgiandia.library.view.reservation.fragment.BookListFragment;
 
 import java.util.Set;
 

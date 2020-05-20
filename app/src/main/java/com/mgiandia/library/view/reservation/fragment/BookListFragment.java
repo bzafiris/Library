@@ -1,4 +1,4 @@
-package com.mgiandia.library.view.reservation.search;
+package com.mgiandia.library.view.reservation.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,10 +15,8 @@ import android.view.ViewGroup;
 
 import com.mgiandia.library.R;
 import com.mgiandia.library.domain.Book;
-import com.mgiandia.library.memorydao.BookDAOMemory;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**

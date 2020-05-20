@@ -1,4 +1,4 @@
-package com.mgiandia.library.view.reservation.search;
+package com.mgiandia.library.view.reservation.fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mgiandia.library.R;
 import com.mgiandia.library.domain.Book;
-import com.mgiandia.library.view.reservation.search.BookListFragment.OnListFragmentInteractionListener;
+import com.mgiandia.library.view.reservation.fragment.BookListFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
 
