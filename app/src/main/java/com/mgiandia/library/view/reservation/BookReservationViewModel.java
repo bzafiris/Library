@@ -20,15 +20,19 @@ public class BookReservationViewModel extends ViewModel {
         Log.d("ViewModel", "ViewModel created");
 
         // assemble presenter
+        presenter = createPresenter();
+
+    }
+
+    protected BookReservationPresenter createPresenter() {
         BookDAO bookDAO = new BookDAOMemory();
         ReservationDAO reservationDAO = new ReservationDAOMemory();
         BorrowerDAO borrowerDAO = new BorrowerDAOMemory();
 
-        presenter = new BookReservationPresenter();
+        BookReservationPresenter presenter = new BookReservationPresenter();
         presenter.setBookDAO(bookDAO);
         presenter.setBorrowerDAO(borrowerDAO);
         presenter.setReservationDAO(reservationDAO);
-
     }
 
     public BookReservationPresenter getPresenter() {

@@ -8,12 +8,15 @@ public class BookSearchViewModel extends ViewModel {
     BookSearchPresenter presenter;
 
     public BookSearchViewModel() {
-
         // assemble presenter here
-        presenter = new BookSearchPresenter();
+        presenter = createPresenter();
+    }
+
+    protected BookSearchPresenter createPresenter() {
+        BookSearchPresenter presenter = new BookSearchPresenter();
         BookDAOMemory bookDAOMemory = new BookDAOMemory();
         presenter.setBookDAO(bookDAOMemory);
-
+        return presenter;
     }
 
 
