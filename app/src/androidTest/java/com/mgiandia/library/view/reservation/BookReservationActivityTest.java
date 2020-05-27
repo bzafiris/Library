@@ -54,7 +54,6 @@ public class BookReservationActivityTest {
         onView(withId(R.id.edt_borrower_id)).perform(clearText());
         onView(withId(R.id.edt_borrower_id)).perform(typeText("2"), closeSoftKeyboard());
 
-
         onView(withId(R.id.btn_reserve_book)).perform(click());
 
         ReservationDAOMemory dao = new ReservationDAOMemory();

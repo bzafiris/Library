@@ -36,8 +36,8 @@ public class BookReservationActivity extends AppCompatActivity
         setContentView(R.layout.activity_book_reservation);
 
         // Uncomment to use the activity standalone
-        Initializer initializer = new MemoryInitializer();
-        initializer.prepareData();
+//        Initializer initializer = new MemoryInitializer();
+//        initializer.prepareData();
 
         viewModel = new ViewModelProvider(this).get(BookReservationViewModel.class);
         final BookReservationPresenter presenter = viewModel.getPresenter();
