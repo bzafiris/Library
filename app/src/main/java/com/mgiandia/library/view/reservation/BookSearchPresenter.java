@@ -6,15 +6,11 @@ import com.mgiandia.library.domain.Book;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BookSearchPresenter {
+public class BookSearchPresenter extends BasePresenter<BookSearchView> {
 
-    private BookSearchView view;
     private BookDAO bookDAO;
     private Set<Book> searchResults = new HashSet<>();
     private String titleCriterion = "", authorNameCriterion = "";
-
-    public BookSearchPresenter() {
-    }
 
     public Set<Book> searchBooks(String title, String authorName){
 
@@ -50,14 +46,6 @@ public class BookSearchPresenter {
 
     public void onBookSelected(Book b){
         view.returnSearchResult(b.getId());
-    }
-
-    public void setView(BookSearchView view) {
-        this.view = view;
-    }
-
-    public void clearView(){
-        this.view = null;
     }
 
     public void setBookDAO(BookDAO bookDAO) {

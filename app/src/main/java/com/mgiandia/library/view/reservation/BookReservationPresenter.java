@@ -6,18 +6,13 @@ import com.mgiandia.library.dao.ReservationDAO;
 import com.mgiandia.library.domain.Book;
 import com.mgiandia.library.domain.Borrower;
 import com.mgiandia.library.domain.Reservation;
-import com.mgiandia.library.memorydao.BorrowerDAOMemory;
-import com.mgiandia.library.memorydao.ReservationDAOMemory;
 
-public class BookReservationPresenter {
+public class BookReservationPresenter extends BasePresenter<BookReservationView> {
 
-    private BookReservationView view;
     private Book book;
     private BookDAO bookDAO;
     private ReservationDAO reservationDAO;
     private BorrowerDAO borrowerDAO;
-
-    public BookReservationPresenter() {}
 
     public void search(String title, String author){
         if (title.isEmpty() && author.isEmpty()){
@@ -88,14 +83,6 @@ public class BookReservationPresenter {
 
         view.showStatus("Η κράτηση έγινε με επιτυχία");
 
-    }
-
-    public void setView(BookReservationView view) {
-        this.view = view;
-    }
-
-    public void clearView(){
-        this.view = null;
     }
 
     public void setBookDAO(BookDAO bookDAO) {
