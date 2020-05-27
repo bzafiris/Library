@@ -6,6 +6,7 @@ import com.mgiandia.library.dao.ReservationDAO;
 import com.mgiandia.library.domain.Book;
 import com.mgiandia.library.domain.Borrower;
 import com.mgiandia.library.domain.Reservation;
+import com.mgiandia.library.view.framework.BasePresenter;
 
 public class BookReservationPresenter extends BasePresenter<BookReservationView> {
 

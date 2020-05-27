@@ -1,4 +1,4 @@
-package com.mgiandia.library.view.reservation;
+package com.mgiandia.library.view.framework;
 
 public abstract class BasePresenter<V> {
     protected V view;

@@ -2,6 +2,7 @@ package com.mgiandia.library.view.reservation;
 
 import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.domain.Book;
+import com.mgiandia.library.view.framework.BasePresenter;
 
 import java.util.HashSet;
 import java.util.Set;
