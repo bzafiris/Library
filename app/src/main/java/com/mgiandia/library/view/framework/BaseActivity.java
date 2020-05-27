@@ -6,7 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public abstract class BaseActivity<VM> extends AppCompatActivity {
+public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatActivity {
 
     protected VM viewModel;
 
