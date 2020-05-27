@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModel;
 
 public class BookReservationViewModel extends ViewModel {
 
-    BookReservationPresenter presenter;
+    protected BookReservationPresenter presenter;
 
     public BookReservationViewModel() {
         super();
@@ -33,6 +33,7 @@ public class BookReservationViewModel extends ViewModel {
         presenter.setBookDAO(bookDAO);
         presenter.setBorrowerDAO(borrowerDAO);
         presenter.setReservationDAO(reservationDAO);
+        return presenter;
     }
 
     public BookReservationPresenter getPresenter() {
