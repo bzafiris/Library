@@ -9,9 +9,7 @@ import com.mgiandia.library.memorydao.BookDAOMemory;
 import com.mgiandia.library.memorydao.BorrowerDAOMemory;
 import com.mgiandia.library.memorydao.ReservationDAOMemory;
 
-import androidx.lifecycle.ViewModel;
-
-public class BookReservationViewModel extends ViewModel {
+public class BookReservationViewModel extends BaseViewModel<BookReservationPresenter> {
 
     protected BookReservationPresenter presenter;
 
@@ -24,6 +22,7 @@ public class BookReservationViewModel extends ViewModel {
 
     }
 
+    @Override
     protected BookReservationPresenter createPresenter() {
         BookDAO bookDAO = new BookDAOMemory();
         ReservationDAO reservationDAO = new ReservationDAOMemory();
@@ -36,6 +35,7 @@ public class BookReservationViewModel extends ViewModel {
         return presenter;
     }
 
+    @Override
     public BookReservationPresenter getPresenter() {
         return presenter;
     }
