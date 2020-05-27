@@ -15,7 +15,7 @@ import com.mgiandia.library.domain.Book;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class BookSearchActivity extends AppCompatActivity
+public class BookSearchActivity extends BaseActivity
         implements ItemSelectionListener<Book>, BookSearchView {
 
     public static final String BOOK_ID_EXTRA = "book_id";
