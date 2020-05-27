@@ -15,7 +15,7 @@ import com.mgiandia.library.domain.Book;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class BookSearchActivity extends BaseActivity
+public class BookSearchActivity extends BaseActivity<BookSearchViewModel>
         implements ItemSelectionListener<Book>, BookSearchView {
 
     public static final String BOOK_ID_EXTRA = "book_id";
@@ -23,7 +23,6 @@ public class BookSearchActivity extends BaseActivity
     RecyclerView recyclerView;
     private BookAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private BookSearchViewModel viewModel;
 
 
     @Override
@@ -38,7 +37,7 @@ public class BookSearchActivity extends BaseActivity
         String authorName = intent.getStringExtra(BookReservationActivity.AUTHOR_NAME_EXTRA);
         // find search result
 
-        viewModel = new ViewModelProvider(this).get(BookSearchViewModel.class);
+        viewModel = getViewModel();
         BookSearchPresenter bookSearchPresenter = viewModel.getPresenter();
         bookSearchPresenter.setView(this);
 
@@ -62,6 +61,11 @@ public class BookSearchActivity extends BaseActivity
         recyclerView.setAdapter(mAdapter);
         // register the current activity as listener for book selection events
         mAdapter.setBookSelectionListener(this);
+    }
+
+    @Override
+    protected BookSearchViewModel getViewModel() {
+        return new ViewModelProvider(this).get(BookSearchViewModel.class);
     }
 
     /**

@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.mgiandia.library.R;
 
-public class BookReservationActivity extends BaseActivity
+public class BookReservationActivity extends BaseActivity<BookReservationViewModel>
         implements BookReservationView {
 
     public static final String BOOK_TITLE_EXTRA = "book_title";
@@ -24,18 +24,12 @@ public class BookReservationActivity extends BaseActivity
     EditText edtBorrowerId;
     TextView txtReservationStatus;
     TextView txtBookInfo;
-    protected BookReservationViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_reservation);
 
-        // Uncomment to use the activity standalone
-//        Initializer initializer = new MemoryInitializer();
-//        initializer.prepareData();
-
-        viewModel = new ViewModelProvider(this).get(BookReservationViewModel.class);
         final BookReservationPresenter presenter = viewModel.getPresenter();
         presenter.setView(this);
 
@@ -69,6 +63,11 @@ public class BookReservationActivity extends BaseActivity
             }
         });
 
+    }
+
+    @Override
+    protected BookReservationViewModel getViewModel() {
+        return new ViewModelProvider(this).get(BookReservationViewModel.class);
     }
 
     /**
