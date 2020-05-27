@@ -13,10 +13,4 @@ public class BookSearchViewModel extends BaseViewModel<BookSearchPresenter> {
         return presenter;
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        // clear view instance to avoid leaking activity
-        presenter.clearView();
-    }
 }

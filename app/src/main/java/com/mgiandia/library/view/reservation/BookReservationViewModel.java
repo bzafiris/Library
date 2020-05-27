@@ -23,10 +23,4 @@ public class BookReservationViewModel extends BaseViewModel<BookReservationPrese
         return presenter;
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        // avoid leaking activity for any reason
-        presenter.clearView();
-    }
 }
