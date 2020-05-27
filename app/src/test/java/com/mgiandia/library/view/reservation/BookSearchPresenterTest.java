@@ -29,15 +29,47 @@ public class BookSearchPresenterTest {
     }
 
     @Test
-    public void testSearch(){
-
+    public void testSingleCriterionSearch(){
         Set<Book> books = presenter.searchBooks("UML", "");
         assertEquals(2, books.size());
 
         Book selected = books.iterator().next();
         presenter.onBookSelected(selected);
         assertEquals(selected.getId(), view.getReturnedSearchResult());
+    }
+
+    @Test
+    public void testDoubleCriteriaSearch(){
+        Set<Book> books = presenter.searchBooks("UML", "Fowler");
+        assertEquals(2, books.size());
+
+        Book selected = books.iterator().next();
+        presenter.onBookSelected(selected);
+        assertEquals(selected.getId(), view.getReturnedSearchResult());
+    }
+
+    @Test
+    public void testSearchWithSameCriteria(){
+        Set<Book> books = presenter.searchBooks("UML", "Fowler");
+        assertEquals(2, books.size());
+
+        Book selected = books.iterator().next();
+        presenter.onBookSelected(selected);
+        assertEquals(selected.getId(), view.getReturnedSearchResult());
+
+        // submit same search
+        presenter.searchBooks("UML", "Fowler");
+        assertEquals(2, books.size());
 
     }
+
+
+
+
+
+
+
+
+
 
 }

@@ -2,39 +2,45 @@ package com.mgiandia.library.view.reservation;
 
 import com.mgiandia.library.dao.BookDAO;
 import com.mgiandia.library.domain.Book;
-import com.mgiandia.library.memorydao.BookDAOMemory;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class BookSearchPresenter {
 
     private BookSearchView view;
     private BookDAO bookDAO;
+    private Set<Book> searchResults = new HashSet<>();
+    private String titleCriterion = "", authorNameCriterion = "";
 
     public BookSearchPresenter() {
     }
 
     public Set<Book> searchBooks(String title, String authorName){
 
-        List<Book> resultA = new ArrayList<>();
-        List<Book> resultB = new ArrayList<>();
-
-        if (!title.isEmpty()){
-            resultA.addAll(bookDAO.findByTitle(title));
+        boolean criteriaChanged = false;
+        if (!this.titleCriterion.equals(title)){
+             criteriaChanged = true;
+             this.titleCriterion = title == null ? "" : title;
+        }
+        if (!this.authorNameCriterion.equals(authorName)){
+            criteriaChanged = true;
+            this.authorNameCriterion = authorName == null ? "" : authorName;
         }
 
-        if (!authorName.isEmpty()){
-            resultB.addAll(bookDAO.findByAuthorName(authorName));
+        if (!criteriaChanged) {
+            return searchResults;
         }
 
-        Set<Book> result = new HashSet<>();
-        result.addAll(resultA);
-        result.addAll(resultB);
-        return result;
+        searchResults.clear();
 
+        if (!this.titleCriterion.isEmpty()){
+            searchResults.addAll(bookDAO.findByTitle(title));
+        }
+        if (!this.authorNameCriterion.isEmpty()){
+            searchResults.addAll(bookDAO.findByAuthorName(authorName));
+        }
+        return searchResults;
     }
 
     public void onBookSelected(Book b){
