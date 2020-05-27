@@ -1,9 +1,8 @@
-package com.mgiandia.library.view.reservation;
+package com.mgiandia.library.view.framework;
 
 import androidx.lifecycle.ViewModel;
 
 public abstract class BaseViewModel<P> extends ViewModel {
-
 
     protected P presenter;
 

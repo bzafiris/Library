@@ -6,6 +6,7 @@ import com.mgiandia.library.dao.ReservationDAO;
 import com.mgiandia.library.memorydao.BookDAOMemory;
 import com.mgiandia.library.memorydao.BorrowerDAOMemory;
 import com.mgiandia.library.memorydao.ReservationDAOMemory;
+import com.mgiandia.library.view.framework.BaseViewModel;
 
 public class BookReservationViewModel extends BaseViewModel<BookReservationPresenter> {
 

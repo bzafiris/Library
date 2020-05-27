@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.mgiandia.library.R;
+import com.mgiandia.library.view.framework.BaseActivity;
 
 public class BookReservationActivity extends BaseActivity<BookReservationViewModel>
         implements BookReservationView {

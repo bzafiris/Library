@@ -1,7 +1,6 @@
 package com.mgiandia.library.view.reservation;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mgiandia.library.R;
 import com.mgiandia.library.domain.Book;
+import com.mgiandia.library.view.framework.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.Set;

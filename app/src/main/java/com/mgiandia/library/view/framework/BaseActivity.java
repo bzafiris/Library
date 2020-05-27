@@ -1,4 +1,4 @@
-package com.mgiandia.library.view.reservation;
+package com.mgiandia.library.view.framework;
 
 import android.os.Bundle;
 import android.widget.Toast;
