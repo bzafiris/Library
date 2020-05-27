@@ -18,15 +18,7 @@ public class BookSearchPresenter {
 
     public Set<Book> searchBooks(String title, String authorName){
 
-        boolean criteriaChanged = false;
-        if (!this.titleCriterion.equals(title)){
-             criteriaChanged = true;
-             this.titleCriterion = title == null ? "" : title;
-        }
-        if (!this.authorNameCriterion.equals(authorName)){
-            criteriaChanged = true;
-            this.authorNameCriterion = authorName == null ? "" : authorName;
-        }
+        boolean criteriaChanged = isCriteriaChanged(title, authorName);
 
         if (!criteriaChanged) {
             return searchResults;
@@ -41,6 +33,19 @@ public class BookSearchPresenter {
             searchResults.addAll(bookDAO.findByAuthorName(authorName));
         }
         return searchResults;
+    }
+
+    private boolean isCriteriaChanged(String title, String authorName) {
+        boolean criteriaChanged = false;
+        if (!this.titleCriterion.equals(title)){
+             criteriaChanged = true;
+             this.titleCriterion = title == null ? "" : title;
+        }
+        if (!this.authorNameCriterion.equals(authorName)){
+            criteriaChanged = true;
+            this.authorNameCriterion = authorName == null ? "" : authorName;
+        }
+        return criteriaChanged;
     }
 
     public void onBookSelected(Book b){

@@ -1,21 +1,17 @@
 package com.mgiandia.library.view.reservation;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.lifecycle.ViewModelProvider;
 
 import com.mgiandia.library.R;
-import com.mgiandia.library.dao.Initializer;
-import com.mgiandia.library.memorydao.MemoryInitializer;
 
-public class BookReservationActivity extends AppCompatActivity
+public class BookReservationActivity extends BaseActivity
         implements BookReservationView {
 
     public static final String BOOK_TITLE_EXTRA = "book_title";
@@ -28,7 +24,7 @@ public class BookReservationActivity extends AppCompatActivity
     EditText edtBorrowerId;
     TextView txtReservationStatus;
     TextView txtBookInfo;
-    private BookReservationViewModel viewModel;
+    protected BookReservationViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,11 +86,6 @@ public class BookReservationActivity extends AppCompatActivity
                 viewModel.getPresenter().setSearchResult(bookId);
             }
         }
-    }
-
-    @Override
-    public void showError(String errorMsg) {
-        Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
     }
 
     @Override
