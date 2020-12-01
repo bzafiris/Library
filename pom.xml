@@ -17,8 +17,8 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<version.junit>5.6.1</version.junit>
 		<version.jacoco>0.8.2</version.jacoco>
-		<jersey.version>2.22.2</jersey.version>
-		<jaxb.api.version>2.3.1</jaxb.api.version>
+		<jersey.version>2.32</jersey.version>
+		<jaxb.api.version>2.3.0.1</jaxb.api.version>
 	</properties>
 
 	<dependencyManagement>
@@ -49,10 +49,16 @@
 			<version>1.4.192</version>
 		</dependency>
 
+		<!-- Jersey -->
 		<!-- Grizzly http container -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-grizzly2-http</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
 		</dependency>
 
 		<!-- JSON support -->
@@ -61,6 +67,12 @@
 			<artifactId>jersey-media-moxy</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
+			<artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- JUnit -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -77,14 +89,6 @@
 			<groupId>org.junit.vintage</groupId>
 			<artifactId>junit-vintage-engine</artifactId>
 			<version>${version.junit}</version>
-			<scope>test</scope>
-		</dependency>
-
-
-
-		<dependency>
-			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
-			<artifactId>jersey-test-framework-provider-grizzly2</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -111,20 +115,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>${jaxb.api.version}</version>
-		</dependency>
-
-		<!-- <dependency> <groupId>com.sun.xml.bind</groupId> <artifactId>jaxb-core</artifactId> 
-			<version>${jaxb.api.version}</version> </dependency> -->
-
-		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
+			<artifactId>jaxb-core</artifactId>
 			<version>${jaxb.api.version}</version>
 		</dependency>
-
+		
 	</dependencies>
 
 	<build>

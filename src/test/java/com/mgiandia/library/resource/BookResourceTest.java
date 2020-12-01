@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.test.TestProperties;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,9 +25,11 @@ public class BookResourceTest extends LibraryResourceTest {
 
 	@Override
 	protected Application configure() {
+		
 		/*
-		 * 
+		 * Enable test properties
 		 */
+		//enable(TestProperties.LOG_TRAFFIC);
 		return new ResourceConfig(BookResource.class, DebugExceptionMapper.class);
 	}
 
