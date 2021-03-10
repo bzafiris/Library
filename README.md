@@ -8,7 +8,7 @@
 Οικοδόμηση 
 ----------
 
-Η οικοδόμηση (build) του λογισμικού γίνεται με το εργαλείο [Maven 3](https://maven.apache.org/download.cgi) , ενώ η παραγωγή της τεχνικής τεκμηρίωσης με χρήση του [ant](http://ant.apache.org/). Η εγκατάσταση των ant και Maven είναι σχετικά απλή. Αφού κατεβάσουμε το [ant](http://ant.apache.org/), (έστω την έκδοση 1.9.10) και το Maven (π.χ. έκδοση 3.3.9) και τα αποσυμπιέσουμε σε κατάλληλους καταλόγους π.χ. <code> C:\\Program Files\\apache-ant-1.9.6\\ </code> και <code> C:\\Program Files\\apache-maven-3.3.9\\ </code> αντίστοιχα θα πρέπει:
+Η οικοδόμηση (build) του λογισμικού γίνεται με το εργαλείο [Maven 3](https://maven.apache.org/download.cgi) , ενώ η παραγωγή της τεχνικής τεκμηρίωσης με χρήση του [ant](http://ant.apache.org/). Η εγκατάσταση των ant και Maven είναι σχετικά απλή. Αφού κατεβάσουμε το [ant](http://ant.apache.org/), (έστω την έκδοση 1.9.8) και το Maven (π.χ. έκδοση 3.3.9) και τα αποσυμπιέσουμε σε κατάλληλους καταλόγους π.χ. <code> C:\\Program Files\\apache-ant-1.9.6\\ </code> και <code> C:\\Program Files\\apache-maven-3.3.9\\ </code> αντίστοιχα θα πρέπει:
 
 * να ορίσουμε τη μεταβλητή περιβάλλοντος JAVA_HOME η οποία θα δείχνει στον κατάλογο εγκατάστασης του JDK,
 * να προσθέσουμε τους καταλόγους <code> C:\\Program Files\\apache-ant-1.9.6\\bin </code> και <code> C:\\Program Files\\apache-maven-3.3.9\\bin </code> στη μεταβλητή περιβάλλοντος PATH.
