@@ -28,7 +28,7 @@
 
 Το αρχείο INSTRUCTIONS περιλαμβάνει αναλυτικές οδηγίες με τις εργασίες που μπορούν να εκτελεστούν με χρήση των εργαλείων Maven και ant.
  
-Eclipse
+Eclipse Use
 -------
 
 Η εισαγωγή του project στο Eclipse γίνεται με την επιλογή <code>File/Import/Maven/Existing Maven Projects</code> με την επιλογή του καταλόγου που περιλαμβάνει το project.  
