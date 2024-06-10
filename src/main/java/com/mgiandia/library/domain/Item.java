@@ -3,6 +3,7 @@ package com.mgiandia.library.domain;
 import jakarta.persistence.*;
 
 import com.mgiandia.catalog.domain.Book;
+import com.mgiandia.catalog.service.BookService;
 import com.mgiandia.library.LibraryException;
 import com.mgiandia.library.service.ItemService;
 import com.mgiandia.library.util.SystemDate;
@@ -59,6 +60,9 @@ public class Item {
         return itemNumber;
     }
 
+    public Book getBook() {
+    	return BookService.factoryMethod(bookno).queryBook();
+    }
 
     /**
      * Θέτει το βιβλίο του αντιτύπου.
