@@ -3,10 +3,9 @@ package com.mgiandia.library.persistence;
 
 import java.util.List;
 
+import com.mgiandia.catalog.domain.Book;
+
 import jakarta.enterprise.context.RequestScoped;
-
-import com.mgiandia.library.domain.Book;
-
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import io.quarkus.panache.common.Parameters;
 

@@ -6,10 +6,11 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
+import com.mgiandia.catalog.domain.Book;
+import com.mgiandia.catalog.service.BookService;
 import com.mgiandia.library.LibraryException;
 import com.mgiandia.library.contacts.EmailAddress;
 import com.mgiandia.library.contacts.EmailMessage;
-import com.mgiandia.library.domain.Book;
 import com.mgiandia.library.domain.Borrower;
 import com.mgiandia.library.domain.Loan;
 import com.mgiandia.library.persistence.LoanRepository;
@@ -56,7 +57,8 @@ public class NotificationService {
         for (Loan loan : allLoans) {
             if (loan.isOverdue() && loan.getBorrower().getEmail()!=null &&
             		loan.getBorrower().getEmail().isValid()) {
-                String message = composeMessage(loan.getItem().getBook(),
+                BookService bookService = BookService.factoryMethod(loan.getItem().getBookno());
+				String message = composeMessage(bookService.queryBook(),
                         -loan.daysToDue());
                 sendEmail(loan.getBorrower(),
                         "Καθυστέρηση Αντιτύπου", message);

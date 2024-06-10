@@ -1,8 +1,9 @@
 package com.mgiandia.library.representation;
 
-import com.mgiandia.library.domain.Publisher;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+
+import com.mgiandia.catalog.domain.Publisher;
 
 @Mapper(componentModel = "jakarta",
 injectionStrategy = InjectionStrategy.CONSTRUCTOR)

@@ -4,7 +4,7 @@ import static com.mgiandia.library.resource.LibraryUri.BOOKS;
 
 import java.util.List;
 
-import com.mgiandia.library.domain.Book;
+import com.mgiandia.catalog.domain.Book;
 import com.mgiandia.library.persistence.BookRepository;
 import com.mgiandia.library.representation.BookMapper;
 import com.mgiandia.library.representation.BookRepresentation;

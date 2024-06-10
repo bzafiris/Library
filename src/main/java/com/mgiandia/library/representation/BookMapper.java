@@ -2,10 +2,10 @@ package com.mgiandia.library.representation;
 
 import java.util.List;
 
-import com.mgiandia.library.domain.Book;
-
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+
+import com.mgiandia.catalog.domain.Book;
 
 @Mapper(componentModel = "jakarta",
 injectionStrategy = InjectionStrategy.CONSTRUCTOR,

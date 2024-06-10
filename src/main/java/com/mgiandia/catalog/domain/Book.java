@@ -1,8 +1,7 @@
-package com.mgiandia.library.domain;
+package com.mgiandia.catalog.domain;
 
 import java.util.HashSet;
 import java.util.Set;
-
 
 import jakarta.persistence.*;
 
@@ -40,11 +39,6 @@ public class Book {
     @JoinColumn(name="publisherid")
     private Publisher publisher;
     
-    
-    @OneToMany(orphanRemoval=true, 
-            cascade = CascadeType.ALL, 
-            mappedBy="book", fetch=FetchType.LAZY)    
-    private Set<Item> items = new HashSet<Item>();
     
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, 
             fetch=FetchType.LAZY)
@@ -166,20 +160,6 @@ public class Book {
     }
 
     /**
-     * Επιστρέφει τα αντίτυπα ({@link Item}) για κάποιο βιβλίο.
-     * Η συλλογή των αντιτύπων είναι αντίγραφο.
-     * Για την προσθήκη κάποιου αντιτύπου
-     * στη συλλογή χρησιμοποιείστε τη μέθοδο {@link Book#addItem(Item)}
-     * και για την απομάκρυνση ενός αντιτύπου
-     * τη μέθοδο {@link Book#removeItem(Item)}.
-     * @return Αντίγραφο της συλλογής των αντιτύπων του βιβλίου
-     */
-    public Set<Item> getItems() {
-        return new HashSet<Item>(items);
-    }
-
-
-    /**
      * Επιστρέφει τους συγγραφείς ({@link Author}) για κάποιο βιβλίο.
      * Η συλλογή των αντιτύπων είναι αντίγραφο. Για την
      * προσθήκη κάποιου συγγραφέα στη συλλογή χρησιμοποιείστε
@@ -189,34 +169,6 @@ public class Book {
      */
     public Set<Author> getAuthors() {
         return new HashSet<Author>(authors);
-    }
-
-    /**
-     * Προσθήκη ενός αντιτύπου ({@link Item}) στη συλλογή αντιτύπων του βιβλίου.
-     * @param item Το αντίτυπο
-     */
-    public void addItem(Item item) {
-        if (item != null) {
-            item.setBook(this);
-        }
-    }
-
-    /**
-     * Απομάκρυνση ενός αντιτύπου ({@link Item}) από τη συλλογή αντιτύπων του βιβλίου.
-     * @param item Το αντίτυπο
-     */
-    public void removeItem(Item item) {
-        if (item != null) {
-            item.setBook(null);
-        }
-    }
-
-    /**
-     * Μη ενθυλακωμένη συλλογή των αντιτύπων του βιβλίου.
-     * @return Τα αντίτυπα του βιβλίου
-     */
-    Set<Item> friendItems() {
-        return items;
     }
 
     /**

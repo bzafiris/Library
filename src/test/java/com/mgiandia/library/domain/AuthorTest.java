@@ -4,6 +4,9 @@ package com.mgiandia.library.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.mgiandia.catalog.domain.Author;
+import com.mgiandia.catalog.domain.Book;
+
  
 
 public class AuthorTest {

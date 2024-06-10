@@ -2,7 +2,9 @@ package com.mgiandia.library.domain;
 
 import jakarta.persistence.*;
 
+import com.mgiandia.catalog.domain.Book;
 import com.mgiandia.library.LibraryException;
+import com.mgiandia.library.service.ItemService;
 import com.mgiandia.library.util.SystemDate;
 
 /**
@@ -17,11 +19,8 @@ public class Item {
     @Column(name="itemno")
     private int itemNumber = 0;
     
-    @ManyToOne(fetch=FetchType.LAZY, 
-            cascade= {CascadeType.PERSIST, CascadeType.MERGE}    
-            ) 
-    @JoinColumn(name="bookno")
-    private Book book;
+    @Column(name = "bookno")
+	private Integer bookno;
     
     @Enumerated(EnumType.STRING)
     @Column(name="itemstate")
@@ -66,13 +65,15 @@ public class Item {
      * @param book  Το βιβλίο του αντιτύπου
      * @see Book#addItem(Item)
      */
-    public void setBook(Book book) {
-        if (this.book != null) {
-            this.book.friendItems().remove(this);
+    public void setBookno(Integer bookno) {
+        if (this.bookno != null) {
+            ItemService itemService = ItemService.factoryMethod(this.bookno);
+			itemService.friendItems().remove(this);
         }
-        this.book = book;
-        if (this.book != null) {
-            this.book.friendItems().add(this);
+        this.bookno = bookno;
+        if (this.bookno != null) {
+            ItemService itemService = ItemService.factoryMethod(this.bookno);
+			itemService.friendItems().add(this);
         }
     }
 
@@ -80,8 +81,8 @@ public class Item {
      * Επιστρέφει το βιβλίο του αντιτύπου.
      * @return Το βιβλίο του αντιτύπου
      */
-    public Book getBook() {
-        return book;
+    public Integer getBookno() {
+        return bookno;
     }
 
 

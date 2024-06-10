@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.mgiandia.catalog.domain.Author;
+import com.mgiandia.catalog.domain.Book;
+import com.mgiandia.catalog.service.BookService;
+import com.mgiandia.library.service.ItemService;
+
 
 
 public class BookTest {
@@ -19,7 +24,8 @@ public class BookTest {
         item = new Item();
         item.setItemNumber(1);
         item.available();
-        book.addItem(item);
+        ItemService itemService = ItemService.factoryMethod(book.getId());
+		itemService.addItem(item, book.getId());
     }
     
     
@@ -36,7 +42,8 @@ public class BookTest {
     @Test
     public void addNullAsItem() {
         expectedItemsSize(book,1);
-        book.addItem(null);
+        ItemService itemService = ItemService.factoryMethod(book.getId());
+		itemService.addItem(null, book.getId());
         expectedItemsSize(book,1);
         itemBidirectionalAssociationInvariant(book);
     }
@@ -54,7 +61,8 @@ public class BookTest {
         expectedItemsSize(book,1);        
         item = new Item();
         item.setItemNumber(2);
-        book.addItem(item);
+        ItemService itemService = ItemService.factoryMethod(book.getId());
+		itemService.addItem(item, book.getId());
         successfullAdditionofItem(book,item);
         expectedItemsSize(book,2);
         itemBidirectionalAssociationInvariant(book);
@@ -72,7 +80,8 @@ public class BookTest {
     @Test
     public void removeNullAsItem() {
         expectedItemsSize(book,1);
-        book.removeItem(null);
+        ItemService itemService = ItemService.factoryMethod(book.getId());
+		itemService.removeItem(null);
         expectedItemsSize(book,1);
         itemBidirectionalAssociationInvariant(book);        
     }
@@ -91,7 +100,8 @@ public class BookTest {
     public void removeItem() {
         itemBidirectionalAssociationInvariant(book);
         expectedItemsSize(book,1);
-        book.removeItem(item);
+        ItemService itemService = ItemService.factoryMethod(book.getId());
+		itemService.removeItem(item);
         successfullRemovalofItem(book,item);
         expectedItemsSize(book,0);        
         itemBidirectionalAssociationInvariant(book);
@@ -112,7 +122,8 @@ public class BookTest {
     @Test
     public void addingSameItemIntoTwoBooks() {
         Book book2 = new Book();
-        book2.addItem(item);
+        ItemService itemService = ItemService.factoryMethod(book2.getId());
+		itemService.addItem(item, book2.getId());
         successfullAdditionofItem(book2,item);
         itemBidirectionalAssociationInvariant(book);
         itemBidirectionalAssociationInvariant(book2);        
@@ -120,23 +131,30 @@ public class BookTest {
     
     
     private void itemBidirectionalAssociationInvariant(Book book) {
-        for(Item item : book.getItems()) {
-        	Assertions.assertSame(book, item.getBook());
+        ItemService itemService = ItemService.factoryMethod(book.getId());
+		for(Item item : itemService.getItems()) {
+        	BookService bookService = BookService.factoryMethod(item.getBookno());
+			Assertions.assertSame(book, bookService.queryBook());
         }
     }
     
     private void successfullAdditionofItem(Book book, Item item){
-    	Assertions.assertTrue(book.getItems().contains(item));
-    	Assertions.assertSame(book, item.getBook());
+    	ItemService itemService = ItemService.factoryMethod(book.getId());
+		Assertions.assertTrue(itemService.getItems().contains(item));
+    	BookService bookService = BookService.factoryMethod(item.getBookno());
+		Assertions.assertSame(book, bookService.queryBook());
     }
     
     private void successfullRemovalofItem(Book book, Item item) {
-    	Assertions.assertFalse(book.getItems().contains(item));
-    	Assertions.assertNull(item.getBook());
+    	ItemService itemService = ItemService.factoryMethod(book.getId());
+		Assertions.assertFalse(itemService.getItems().contains(item));
+    	BookService bookService = BookService.factoryMethod(item.getBookno());
+		Assertions.assertNull(bookService.queryBook());
     }
     
     private void expectedItemsSize(Book book, int expectedSize) {
-    	Assertions.assertEquals(expectedSize, book.getItems().size());
+    	ItemService itemService = ItemService.factoryMethod(book.getId());
+		Assertions.assertEquals(expectedSize, itemService.getItems().size());
     }
     
     private void authorBidirectionalAssociationInvariant(Book book) {
